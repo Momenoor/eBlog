@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Articles;
 class Comments extends Model
 {
     use HasFactory;
@@ -12,4 +12,10 @@ class Comments extends Model
         'author_id',
         'content'
         ];
+    //
+
+    public function article() {
+            return $this->belongsTo(Articles::class,'aricle_id');
+        }
+
 }

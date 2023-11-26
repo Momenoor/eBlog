@@ -13,4 +13,9 @@ class Tags extends Model
         'slug',
         'description'
     ];
+
+    //
+    public function articles(){
+        return $this->hasMany(Articles::class);
+    }
 }

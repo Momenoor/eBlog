@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Comments;
+use App\Models\Categories;
 
 class Articles extends Model
 {
@@ -20,6 +22,35 @@ class Articles extends Model
         'approved_at',
         'published_at',
         'declined_at',
-        'hero_image_id'
+        'hero_image_id',
     ];
+
+    protected $casts =  [
+        'is_pinned' => 'boolean', // bool True or False
+        'submitted_at' => 'datetime',
+        'approved_at' => 'datetime',
+        'published_at' => 'datetime',
+        'declined_at' => 'datetime',
+    ];
+
+    //
+    public function category(){
+        return $this->belongsTo(Categories::class);
+    }
+
+    //
+    public function comments() {
+        return $this->hasMany(Comments::class);
+    }
+
+    //
+    /*public function author(){
+        return $this->belongsTo('App\Models\Author','author_id');
+    }*/
+
+    //
+    public function tags(){
+        return $this->hasMany(Tags::class);
+    }
+
 }
