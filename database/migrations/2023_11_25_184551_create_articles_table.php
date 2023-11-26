@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->string('content');
+            $table->text('body');
             $table->unsignedBigInteger('author_id');;
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
