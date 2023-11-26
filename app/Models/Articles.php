@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comments;
 use App\Models\Categories;
+use App\Models\Media;
 
 class Articles extends Model
 {
@@ -51,6 +52,11 @@ class Articles extends Model
     //
     public function tags(){
         return $this->hasMany(Tags::class);
+    }
+
+    //
+    public function heroImage(){
+        return $this->hasMany(Media::class);
     }
 
 }
