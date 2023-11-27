@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CategoriesStoreRequest;
+use App\Http\Requests\CategoriesUpdateRequest;
 class CategoriesController extends Controller
 {
     /**
@@ -12,7 +13,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return view('category.index');
     }
 
     /**
@@ -20,13 +21,13 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoriesStoreRequest $request)
     {
         //
     }
@@ -36,7 +37,7 @@ class CategoriesController extends Controller
      */
     public function show(Categories $categories)
     {
-        //
+        return view('category.view');
     }
 
     /**
@@ -44,13 +45,13 @@ class CategoriesController extends Controller
      */
     public function edit(Categories $categories)
     {
-        //
+        return view('category.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(CategoriesUpdateRequest $request, Categories $categories)
     {
         //
     }

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Permissions;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\PermissionStoreRequest;
+use App\Http\Requests\PermissionUpdateRequest;
 class PermissionsController extends Controller
 {
     /**
@@ -12,7 +13,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        return view('permission.index');
     }
 
     /**
@@ -20,13 +21,13 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('permission.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PermissionStoreRequest $request)
     {
         //
     }
@@ -36,7 +37,7 @@ class PermissionsController extends Controller
      */
     public function show(Permissions $permissions)
     {
-        //
+        return view('permission.view');
     }
 
     /**
@@ -44,13 +45,13 @@ class PermissionsController extends Controller
      */
     public function edit(Permissions $permissions)
     {
-        //
+        return view('permission.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Permissions $permissions)
+    public function update(PermissionUpdateRequest $request, Permissions $permissions)
     {
         //
     }

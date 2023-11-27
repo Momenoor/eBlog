@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\MediaStoreRequest;
+use App\Http\Requests\MediaUpdateRequest;
 class MediaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return view('media.index');
     }
 
     /**
@@ -20,13 +18,13 @@ class MediaController extends Controller
      */
     public function create()
     {
-        //
+        return view('media.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MediaStoreRequest $request)
     {
         //
     }
@@ -36,7 +34,7 @@ class MediaController extends Controller
      */
     public function show(Media $media)
     {
-        //
+        return view('media.view');
     }
 
     /**
@@ -44,13 +42,13 @@ class MediaController extends Controller
      */
     public function edit(Media $media)
     {
-        //
+        return view('media.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Media $media)
+    public function update(MediaUpdateRequest $request, Media $media)
     {
         //
     }

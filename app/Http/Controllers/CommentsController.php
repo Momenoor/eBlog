@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Comments;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CommentsUpdateRequest;
+use App\Http\Requests\CommentsStoreRequest;
 class CommentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return view('comment.index');
     }
 
     /**
@@ -20,13 +18,13 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('comment.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentsStoreRequest $request)
     {
         //
     }
@@ -36,7 +34,7 @@ class CommentsController extends Controller
      */
     public function show(Comments $comments)
     {
-        //
+        return view('comment.view');
     }
 
     /**
@@ -44,13 +42,13 @@ class CommentsController extends Controller
      */
     public function edit(Comments $comments)
     {
-        //
+        return view('comment.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comments $comments)
+    public function update(CommentsStoreRequest $request, Comments $comments)
     {
         //
     }

@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->foreign('hero_image_id')->references('id')->on('media')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 

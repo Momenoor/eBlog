@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Roles;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\RolesStoreRequest;
+use App\Http\Requests\RolesUpdateRequest;
 class RolesController extends Controller
 {
     /**
@@ -12,7 +13,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+        return view('role.index');
     }
 
     /**
@@ -20,13 +21,13 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('role.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RolesStoreRequest $request)
     {
         //
     }
@@ -36,7 +37,7 @@ class RolesController extends Controller
      */
     public function show(Roles $roles)
     {
-        //
+        return view('role.view');
     }
 
     /**
@@ -44,13 +45,13 @@ class RolesController extends Controller
      */
     public function edit(Roles $roles)
     {
-        //
+        return view('role.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Roles $roles)
+    public function update(RolesUpdateRequest $request, Roles $roles)
     {
         //
     }

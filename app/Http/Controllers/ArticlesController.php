@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Articles;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\ArticleStoreRequest;
+use App\Http\Requests\ArticleUpdateRequest;
 class ArticlesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return view('article.index');
     }
 
     /**
@@ -20,23 +18,25 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        return view('article.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArticleStoreRequest $request)
     {
-        //
+
+
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(Articles $articles)
     {
-        //
+        return view('article.view');
     }
 
     /**
@@ -44,13 +44,13 @@ class ArticlesController extends Controller
      */
     public function edit(Articles $articles)
     {
-        //
+        return view('article.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Articles $articles)
+    public function update(ArticleUpdateRequest $request, Articles $articles)
     {
         //
     }
