@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('profile_photo_path')->nullable();;
             $table->string('role_id');
             $table->string('bio', 160)->default(null);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
