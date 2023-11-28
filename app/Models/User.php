@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'profile_photo_path',
     ];
 
     /**
@@ -50,5 +52,9 @@ class User extends Authenticatable
 
     public function articles(){
         return $this->hasMany(Articles::class,'author_id');
+    }
+
+    public function role() {
+        return $this->belongsTo(Roles::class);
     }
 }

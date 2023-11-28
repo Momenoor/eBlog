@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class TagsStoreRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -21,10 +23,15 @@ class TagsStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->has('name')) {
+            $this->merge([
+                'slug' => Str::slug($this->name),
+            ]);
+        }
         return [
-            'name'=>'required',
-            'slug'=>'required|unique:tags,slug',
-            'description'=>'sometimes|string',
+            'name' => 'required',
+            'slug' => 'required|unique:tags,slug',
+            'description' => 'sometimes|string',
         ];
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permissions;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Requests\PermissionStoreRequest;
 use App\Http\Requests\PermissionUpdateRequest;
-class PermissionsController extends Controller
+
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,13 +30,28 @@ class PermissionsController extends Controller
      */
     public function store(PermissionStoreRequest $request)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $permission = new Permission();
+            $permission->name = $request->name;
+            $permission->description = $request->description;
+            $permission->status = $request->status;
+            $permission->save();
+            return redirect()->route('permission.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+        /*Permissions::create([
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'status'=>$request->status,
+        ]);*/
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Permissions $permissions)
+    public function show(Permission $permissions)
     {
         return view('permission.view');
     }
@@ -43,7 +59,7 @@ class PermissionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Permissions $permissions)
+    public function edit(Permission $permissions)
     {
         return view('permission.edit');
     }
@@ -51,7 +67,7 @@ class PermissionsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PermissionUpdateRequest $request, Permissions $permissions)
+    public function update(PermissionUpdateRequest $request, Permission $permissions)
     {
         //
     }
@@ -59,7 +75,7 @@ class PermissionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Permissions $permissions)
+    public function destroy(Permission $permissions)
     {
         //
     }

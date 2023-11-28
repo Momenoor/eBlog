@@ -23,7 +23,7 @@ class RolesStoreRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'description'=>'text',
+            'description'=>'required',
         ];
     }
 }

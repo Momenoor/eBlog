@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tags;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\TagsStoreRequest;
 use App\Http\Requests\TagsUpdateRequest;
-class TagsController extends Controller
+
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,13 +30,28 @@ class TagsController extends Controller
      */
     public function store(TagsStoreRequest $request)
     {
-        //
+        try {
+            /* $tag = new Tags(); */
+            /* $tag->name = $request->name; */
+            /* $tag->slug = $request->slug; */
+            /* $tag->description = $request->description; */
+
+
+            Tag::create($request->all());
+            return redirect()->route('tags.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+        /*Tags::create([
+            'name'=>$request->name,
+            'description'=>$request->description,
+        ]);*/
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tags $tags)
+    public function show(Tag $tags)
     {
         return view('tag.view');
     }
@@ -43,7 +59,7 @@ class TagsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tags $tags)
+    public function edit(Tag $tags)
     {
         return view('tag.edit');
     }
@@ -51,7 +67,7 @@ class TagsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TagsUpdateRequest $request, Tags $tags)
+    public function update(TagsUpdateRequest $request, Tag $tags)
     {
         //
     }
@@ -59,7 +75,7 @@ class TagsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tags $tags)
+    public function destroy(Tag $tags)
     {
         //
     }

@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Articles;
-class Categories extends Model
+use App\Models\Article;
+
+class Category extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'slug',
         'description',
@@ -18,12 +19,14 @@ class Categories extends Model
 
     //
 
-    public function articles(){
-        return $this->hasMany(Articles::class);
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
     }
 
     //
-    public function createdBy() {
-        return $this->belongsTo(User::class,'created_by');
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

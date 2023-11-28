@@ -32,7 +32,7 @@
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary me-1">{{__('save')}}</button>
-            <a href="{{route('tags.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
+            <a href="{{route('roles.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
         </div>
     </div>
 </form>

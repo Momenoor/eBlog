@@ -23,7 +23,7 @@ class PermissionStoreRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'description'=>'text',
+            'description'=>'required',
             'created_by'=>'integer:exists:users,id',
             'status'=>'required'
 

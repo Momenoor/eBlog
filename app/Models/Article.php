@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Comments;
-use App\Models\Categories;
+use App\Models\Comment;
+use App\Models\Category;
 use App\Models\Media;
 
-class Articles extends Model
+class Article extends Model
 {
     use HasFactory;
 
@@ -35,13 +35,15 @@ class Articles extends Model
     ];
 
     //
-    public function category(){
-        return $this->belongsTo(Categories::class);
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     //
-    public function comments() {
-        return $this->hasMany(Comments::class);
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     //
@@ -50,13 +52,14 @@ class Articles extends Model
     }*/
 
     //
-    public function tags(){
-        return $this->hasMany(Tags::class);
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
     }
 
     //
-    public function heroImage(){
+    public function heroImage()
+    {
         return $this->hasMany(Media::class);
     }
-
 }

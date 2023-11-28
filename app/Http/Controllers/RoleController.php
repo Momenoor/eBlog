@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Roles;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\RolesStoreRequest;
 use App\Http\Requests\RolesUpdateRequest;
-class RolesController extends Controller
+
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,13 +30,27 @@ class RolesController extends Controller
      */
     public function store(RolesStoreRequest $request)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $role = new Role();
+            $role->name = $request->name;
+            $role->description = $request->description;
+            $role->save();
+            return redirect()->route('role.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+
+        /*Roles::create([
+            'name'=>$request->name,
+            'description'=>$request->description,
+        ]);*/
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Roles $roles)
+    public function show(Role $roles)
     {
         return view('role.view');
     }
@@ -43,7 +58,7 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Roles $roles)
+    public function edit(Role $roles)
     {
         return view('role.edit');
     }
@@ -51,7 +66,7 @@ class RolesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(RolesUpdateRequest $request, Roles $roles)
+    public function update(RolesUpdateRequest $request, Role $roles)
     {
         //
     }
@@ -59,7 +74,7 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Roles $roles)
+    public function destroy(Role $roles)
     {
         //
     }
