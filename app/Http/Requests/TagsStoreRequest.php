@@ -24,7 +24,7 @@ class TagsStoreRequest extends FormRequest
         return [
             'name'=>'required',
             'slug'=>'required|unique:tags,slug',
-            'description'=>'text',
+            'description'=>'sometimes|string',
         ];
     }
 }

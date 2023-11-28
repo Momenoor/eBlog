@@ -12,20 +12,27 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-10">
-                        <label for="name" class="form-label">{{__('name')}}</label>
-                        <input name="name" id="name" type="text" class="form-control" value="{{old('name')}}" />
+                        <label for="name" class="form-label fw-bold required">{{__('name')}}</label>
+                        <input name="name" id="name" type="text"
+                            class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" />
+                        @error('name')
+                        <span class="text-danger">{{$errors->first('name')}}</span>
+                        @enderror
                     </div>
                     <div class="mb-10">
-                        <label for="description" class="form-label">{{__('description')}}</label>
+                        <label for="description" class="form-label fw-bold">{{__('description')}}</label>
                         <textarea name="description" id="description"
-                            class="form-control">{{old('description')}}</textarea>
+                            class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
+                        @error('name')
+                        <span class="text-danger">{{$errors->first('description')}}</span>
+                        @enderror
                     </div>
                 </div>
             </div>
         </div>
-        <div class="form-footer">
-            <button type="submit" class="btn btn-primary">{{__('save')}}</button>
-            <a href="{{route('tags.index')}}" class="btn btn-light">{{__('cancel')}}</a>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary me-1">{{__('save')}}</button>
+            <a href="{{route('tags.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
         </div>
     </div>
 </form>
