@@ -1,5 +1,3 @@
-import './bootstrap';
-import './components/app';
-import './components/_init';
-import './components/blockui';
-import './components/cookie';
+import '../plugins/global/plugins.bundle.css';
+import '../css/style.bundle.css';
+

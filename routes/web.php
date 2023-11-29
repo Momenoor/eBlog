@@ -21,10 +21,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('articles',App\Http\Controllers\ArticlesController::class);
-Route::resource('categories',App\Http\Controllers\CategoriesController::class);
-Route::resource('comments',App\Http\Controllers\CommentsController::class);
-Route::resource('permissions',App\Http\Controllers\PermissionsController::class);
-Route::resource('roles',App\Http\Controllers\RolesController::class);
-Route::resource('tags',App\Http\Controllers\TagsController::class);
-Route::resource('media',App\Http\Controllers\MediaController::class);
+Route::resource('article', App\Http\Controllers\ArticleController::class);
+Route::resource('category', App\Http\Controllers\CategoryController::class);
+Route::resource('comment', App\Http\Controllers\CommentController::class);
+Route::resource('permission', App\Http\Controllers\PermissionController::class);
+Route::resource('role', App\Http\Controllers\RoleController::class);
+Route::resource('tag', App\Http\Controllers\TagController::class);
+Route::resource('media', App\Http\Controllers\MediaController::class);
