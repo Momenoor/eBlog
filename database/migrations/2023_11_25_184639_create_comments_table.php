@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Articles;
+use App\Models\Article;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignIdFor(Articles::class);
+            $table->foreignIdFor(Article::class);
             $table->text('body');
             $table->timestamps();
         });

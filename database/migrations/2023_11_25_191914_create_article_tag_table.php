@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Articles;
-use App\Models\Tags;
+use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('article_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Tags::class);
-            $table->foreignIdFor(Articles::class);
+            $table->foreignIdFor(Tag::class);
+            $table->foreignIdFor(Article::class);
             $table->timestamps();
         });
     }
