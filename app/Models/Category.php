@@ -17,6 +17,7 @@ class Category extends Model
         'created_by'
     ];
 
+
     //
 
     public function articles()

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<form action="{{route('categories.store')}}" method="POST">
+<form action="{{route('category.store')}}" method="POST">
     @csrf
     <div class="card">
         <div class="card-header">
@@ -20,14 +20,6 @@
                         @enderror
                     </div>
                     <div class="mb-10">
-                        <label for="slug" class="form-label fw-bold required">{{__('slug')}}</label>
-                        <input name="slug" id="slug" type="text"
-                            class="form-control @error('slug') is-invalid @enderror" value="{{old('slug')}}" />
-                        @error('name')
-                        <span class="text-danger">{{$errors->first('slug')}}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-10">
                         <label for="description" class="form-label fw-bold">{{__('description')}}</label>
                         <textarea name="description" id="description"
                             class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
@@ -40,7 +32,7 @@
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary me-1">{{__('save')}}</button>
-            <a href="{{route('tags.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
+            <a href="{{route('category.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
         </div>
     </div>
 </form>

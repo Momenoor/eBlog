@@ -14,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('role.index');
+        $roles = Role::all();
+        return view('role.index', compact('roles'));
     }
 
     /**
@@ -30,21 +31,13 @@ class RoleController extends Controller
      */
     public function store(RolesStoreRequest $request)
     {
+
         try {
-            $validated = $request->validated();
-            $role = new Role();
-            $role->name = $request->name;
-            $role->description = $request->description;
-            $role->save();
+            Role::create($request->all());
             return redirect()->route('role.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-
-        /*Roles::create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-        ]);*/
     }
 
     /**

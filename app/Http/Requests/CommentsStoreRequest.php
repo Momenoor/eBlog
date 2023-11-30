@@ -22,9 +22,9 @@ class CommentsStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'author_id'=>'integer|exists:users,id',
-            'article_id'=>'integer|exists:articles,id',
-            'body'=>'text',
+            'author_id' => 'integer|exists:users,id',
+            'article_id' => 'integer|exists:articles,id',
+            'body' => 'text',
         ];
     }
 }

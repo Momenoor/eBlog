@@ -19,14 +19,7 @@
                         <span class="text-danger">{{$errors->first('name')}}</span>
                         @enderror
                     </div>
-                    <div class="mb-10">
-                        <label for="slug" class="form-label fw-bold required">{{__('slug')}}</label>
-                        <input name="slug" id="slug" type="text"
-                            class="form-control @error('slug') is-invalid @enderror" value="{{old('slug')}}" />
-                        @error('name')
-                        <span class="text-danger">{{$errors->first('slug')}}</span>
-                        @enderror
-                    </div>
+
                     <div class="mb-10">
                         <label for="description" class="form-label fw-bold">{{__('description')}}</label>
                         <textarea name="description" id="description"

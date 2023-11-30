@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use PHPUnit\Framework\Constraint\IsTrue;
+use Illuminate\Support\Str;
 
 class CategoriesStoreRequest extends FormRequest
 {
@@ -22,11 +23,17 @@ class CategoriesStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->has('name')) {
+            $this->merge([
+                'slug' => Str::slug($this->name),
+                'created_by' => 1,
+            ]);
+        }
         return [
-            'name'=>'required',
+            'name' => 'required',
             'slug' => 'required|unique:categories,slug',
-            'description'=>'text',
-            'created_by'=>'integer|exists:users,id',
+            'description' => 'sometimes|string',
+            'created_by' => 'integer|exists:users,id',
 
         ];
     }

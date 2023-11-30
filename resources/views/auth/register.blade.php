@@ -75,7 +75,6 @@
                                 <input name="profile_photo_path " id="profile_photo_path " type="file"
                                     class="form-control @error('hero_image') is-invalid @enderror"
                                     value="{{old('profile_photo_path ')}}" />
-                                <input type="file" name="profile_photo_path" accept="image/*" multiple>
                                 @error('name')
                                 <span class="text-danger">{{$errors->first('profile_photo_path ')}}</span>
                                 @enderror

@@ -14,7 +14,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('tag.index');
+        $tags = Tag::all();
+        return view('tag.index', compact('tags'));
     }
 
     /**
@@ -31,26 +32,13 @@ class TagController extends Controller
     public function store(TagsStoreRequest $request)
     {
         try {
-            /* $tag = new Tags(); */
-            /* $tag->name = $request->name; */
-            /* $tag->slug = $request->slug; */
-            /* $tag->description = $request->description; */
-
-
             Tag::create($request->all());
-            return redirect()->route('tags.index');
+            return redirect()->route('tag.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-        /*Tags::create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-        ]);*/
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Tag $tags)
     {
         return view('tag.view');

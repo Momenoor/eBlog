@@ -30,7 +30,12 @@ class CategoryController extends Controller
      */
     public function store(CategoriesStoreRequest $request)
     {
-        //
+        try {
+            Category::create($request->all());
+            return redirect()->route('Category.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     /**

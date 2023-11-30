@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<form action="{{route('roles.store')}}" method="POST">
+<form action="{{route('role.store')}}" method="POST">
     @csrf
     <div class="card">
         <div class="card-header">
@@ -32,7 +32,7 @@
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary me-1">{{__('save')}}</button>
-            <a href="{{route('roles.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
+            <a href="{{route('role.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
         </div>
     </div>
 </form>
