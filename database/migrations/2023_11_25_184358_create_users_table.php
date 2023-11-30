@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('profile_photo_path')->nullable();;
-            $table->string('role_id');
-            $table->string('bio', 160)->default(null);
+            $table->string('role_id')->nullable();
+            $table->string('bio', 160)->default(null)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

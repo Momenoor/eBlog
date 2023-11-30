@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UsersStoreRequest;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -53,26 +55,42 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role_id' => ['required'],
-            'profile_photo_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'bio'=> 'string|max:160',
+            //'profile_photo_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'role_id' => ['integer'],
+            //'bio' => 'string|max:160',
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
     protected function create(array $data)
     {
-        return User::create([
+        /*return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role_id' => $data['role_id'],
             'profile_photo_path' => $data['profile_photo_path'],
-        ]);
+        ]);*/
+
+
+        try {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                //'profile_photo_path' => $this->uploadImage($data['profile_photo_path']),
+                //'bio' => 'roles',
+                //'role_id' => 1,
+            ]);
+            return $user;
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
+    }
+
+    protected function uploadImage($image)
+    {
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path('images'), $imageName);
+        return $imageName;
     }
 }
