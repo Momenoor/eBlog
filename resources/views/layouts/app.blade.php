@@ -3,7 +3,7 @@
 @include('layouts._head')
 <!--begin::Body-->
 
-<body id="kt_app_body" data-kt-app-header-stacked="true" data-kt-app-header-primary-enabled="true"
+<body id="kt_app_body" data-kt-app-header-stacked="true" data-kt-app-header-primary-enabled="false"
     data-kt-app-header-secondary-enabled="true" data-kt-app-header-tertiary-enabled="true" class="app-default">
     <!--begin::Theme mode setup on page load-->
     @include('layouts._theme_script')

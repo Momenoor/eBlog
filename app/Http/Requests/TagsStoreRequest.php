@@ -29,9 +29,9 @@ class TagsStoreRequest extends FormRequest
             ]);
         }
         return [
-            'name' => 'required',
+            'name' => 'required|unique:tags,name',
             'slug' => 'required|unique:tags,slug',
-            'description' => 'sometimes|string',
+            'description' => 'nullable|string',
         ];
     }
 }
