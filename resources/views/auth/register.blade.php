@@ -165,36 +165,35 @@
                 {{-- I Accept the <a href="#" class="ms-1 link-primary">Terms</a> --}}
                 {{-- </span> --}}
             {{-- </label> --}}
-    </div>
-    <!--end::Accept-->
+        <!--end::Accept-->
 
-    <!--begin::Submit button-->
-    <div class="d-grid mb-10">
-        <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
+        <!--begin::Submit button-->
+        <div class="d-grid mb-10">
+            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
 
-            <!--begin::Indicator label-->
-            <span class="indicator-label">
-                Sign up</span>
-            <!--end::Indicator label-->
+                <!--begin::Indicator label-->
+                <span class="indicator-label">
+                    Sign up</span>
+                <!--end::Indicator label-->
 
-            <!--begin::Indicator progress-->
-            <span class="indicator-progress">
-                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-            </span>
-            <!--end::Indicator progress-->
-        </button>
-    </div>
-    <!--end::Submit button-->
+                <!--begin::Indicator progress-->
+                <span class="indicator-progress">
+                    Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+                <!--end::Indicator progress-->
+            </button>
+        </div>
+        <!--end::Submit button-->
 
-    <!--begin::Sign up-->
-    <div class="text-gray-500 text-center fw-semibold fs-6">
-        Already have an Account?
+        <!--begin::Sign up-->
+        <div class="text-gray-500 text-center fw-semibold fs-6">
+            Already have an Account?
 
-        <a href="/metronic8/demo28/../demo28/authentication/layouts/corporate/sign-in.html"
-            class="link-primary fw-semibold">
-            Sign in
-        </a>
-    </div>
-    <!--end::Sign up-->
+            <a href="/metronic8/demo28/../demo28/authentication/layouts/corporate/sign-in.html"
+                class="link-primary fw-semibold">
+                Sign in
+            </a>
+        </div>
+        <!--end::Sign up-->
 </form>
 @endsection
