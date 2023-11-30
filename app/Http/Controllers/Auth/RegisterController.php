@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\UsersStoreRequest;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
@@ -46,7 +45,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -71,20 +70,15 @@ class RegisterController extends Controller
             'profile_photo_path' => $data['profile_photo_path'],
         ]);*/
 
-
-        try {
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                //'profile_photo_path' => $this->uploadImage($data['profile_photo_path']),
-                //'bio' => 'roles',
-                //'role_id' => 1,
-            ]);
-            return $user;
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
-        }
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            //'profile_photo_path' => $this->uploadImage($data['profile_photo_path']),
+            //'bio' => 'roles',
+            //'role_id' => 1,
+        ]);
+        return $user;
     }
 
     protected function uploadImage($image)
