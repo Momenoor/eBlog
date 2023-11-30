@@ -1,7 +1,7 @@
 <div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside"
-    data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
-    data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
-    data-kt-drawer-toggle="#kt_aside_mobile_toggle">
+     data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
+     data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
+     data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
@@ -11,8 +11,8 @@
         <!--end::Logo-->
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle me-n2"
-            data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
-            data-kt-toggle-name="aside-minimize">
+             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+             data-kt-toggle-name="aside-minimize">
             <i class="ki-outline ki-double-left fs-1 rotate-180"></i>
         </div>
         <!--end::Aside toggler-->
@@ -22,12 +22,12 @@
     <div class="aside-menu flex-column-fluid">
         <!--begin::Aside Menu-->
         <div class="hover-scroll-overlay-y" id="kt_aside_menu_wrapper" data-kt-scroll="true"
-            data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto"
-            data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu"
-            data-kt-scroll-offset="0">
+             data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto"
+             data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu"
+             data-kt-scroll-offset="0">
             <!--begin::Menu-->
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
-                id="#kt_aside_menu" data-kt-menu="true">
+                 id="#kt_aside_menu" data-kt-menu="true">
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <!--begin:Menu link-->
@@ -262,8 +262,8 @@
                         <div class="menu-item">
                             <div class="menu-content">
                                 <a class="btn btn-flex btn-color-primary d-flex flex-stack fs-base p-0 ms-2 mb-2 toggle collapsible collapsed"
-                                    data-bs-toggle="collapse" href="#kt_app_sidebar_menu_dashboards_collapse"
-                                    data-kt-toggle-text="Show Less">
+                                   data-bs-toggle="collapse" href="#kt_app_sidebar_menu_dashboards_collapse"
+                                   data-kt-toggle-text="Show Less">
                                     <span data-kt-toggle-text-target="true">Show 12 More</span>
                                     <i class="ki-outline ki-minus-square toggle-on fs-2 me-0"></i>
                                     <i class="ki-outline ki-plus-square toggle-off fs-2 me-0"></i>
@@ -1021,7 +1021,7 @@
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start"
-                    class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention">
+                     class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention">
                     <!--begin:Menu link-->
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -1596,7 +1596,7 @@
                                         <div class="menu-item">
                                             <!--begin:Menu link-->
                                             <a class="menu-link"
-                                                href="utilities/modals/wizards/two-factor-authentication.html">
+                                               href="utilities/modals/wizards/two-factor-authentication.html">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -3082,7 +3082,7 @@
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities"
-                        target="_blank">
+                       target="_blank">
                         <span class="menu-icon">
                             <i class="ki-outline ki-rocket fs-2"></i>
                         </span>
@@ -3119,8 +3119,8 @@
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link"
-                        href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog"
-                        target="_blank">
+                       href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog"
+                       target="_blank">
                         <span class="menu-icon">
                             <i class="ki-outline ki-code fs-2"></i>
                         </span>
@@ -3137,8 +3137,8 @@
     <!--begin::Footer-->
     <div class="aside-footer flex-column-auto pb-7 px-5" id="kt_aside_footer">
         <a href="https://preview.keenthemes.com/html/metronic/docs" class="btn btn-custom btn-primary w-100"
-            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
-            title="200+ in-house components and 3rd-party plugins">
+           data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
+           title="200+ in-house components and 3rd-party plugins">
             <span class="btn-label">Docs & Components</span>
             <i class="ki-outline ki-document btn-icon fs-2"></i>
         </a>
