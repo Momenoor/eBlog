@@ -189,8 +189,7 @@
         <div class="text-gray-500 text-center fw-semibold fs-6">
             Already have an Account?
 
-            <a href="/metronic8/demo28/../demo28/authentication/layouts/corporate/sign-in.html"
-                class="link-primary fw-semibold">
+            <a href="{{route('login')}}" class="link-primary fw-semibold">
                 Sign in
             </a>
         </div>

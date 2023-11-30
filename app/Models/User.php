@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Categories;
+use App\Models\Category;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -46,15 +47,18 @@ class User extends Authenticatable
     ];
 
     //
-    public function categories() {
-        return $this->hasMany(Categories::class,'created_by');
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'created_by');
     }
 
-    public function articles(){
-        return $this->hasMany(Articles::class,'author_id');
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id');
     }
 
-    public function role() {
-        return $this->belongsTo(Roles::class);
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

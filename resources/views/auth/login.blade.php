@@ -91,7 +91,6 @@
         @error('name')
         <span class="text-danger">{{$errors->first('password')}}</span>
         @enderror
-        iv>
     </div>
     <!--end::Input group--->
 
