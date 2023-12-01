@@ -210,11 +210,9 @@
                         <td class="text-end pe-0">
                             <span class="fw-bold">{{$comment->id}}</span>
                         </td>
-                        @foreach($articles as $article)
                         <td class="text-end pe-0">
-                            <span class="fw-bold">{{$article->title}}</span>
+                            <span class="fw-bold">{{$comment->article_id}}</span>
                         </td>
-                        @endforeach
                         <td class="text-end pe-0">
                             <span class="fw-bold">{{$comment->body}}</span>
                         </td>
