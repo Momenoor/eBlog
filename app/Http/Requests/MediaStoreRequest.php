@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Article;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MediaStoreRequest extends FormRequest
@@ -21,12 +22,13 @@ class MediaStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            'name'=>'required',
-            'type'=>'required',
-            'path'=>'required',
-            'size'=>'required',
-            'article_id'=>'integer|exists:articles,id',
+            'name' => 'required',
+            'type' => 'required',
+            'path' => 'required',
+            'size' => 'required',
+            'article_id' => 'integer|exists:articles,id',
         ];
     }
 }

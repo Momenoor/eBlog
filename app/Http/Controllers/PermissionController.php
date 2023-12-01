@@ -14,7 +14,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('permission.index');
+        $permissions = Permission::all();
+        return view('permission.index', compact('permissions'));
     }
 
     /**
@@ -31,21 +32,11 @@ class PermissionController extends Controller
     public function store(PermissionStoreRequest $request)
     {
         try {
-            $validated = $request->validated();
-            $permission = new Permission();
-            $permission->name = $request->name;
-            $permission->description = $request->description;
-            $permission->status = $request->status;
-            $permission->save();
+            Permission::create($request->all());
             return redirect()->route('permission.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-        /*Permissions::create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'status'=>$request->status,
-        ]);*/
     }
 
     /**

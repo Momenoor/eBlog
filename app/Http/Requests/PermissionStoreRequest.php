@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PermissionStoreRequest extends FormRequest
 {
@@ -21,11 +22,16 @@ class PermissionStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->has('name')) {
+            $this->merge([
+                'created_by' => Auth::id(),
+            ]);
+        }
         return [
-            'name'=>'required',
-            'description'=>'required',
-            'created_by'=>'integer:exists:users,id',
-            'status'=>'required'
+            'name' => 'required',
+            'description' => 'required',
+            'created_by' => 'integer:exists:users,id',
+            'status' => 'required'
 
         ];
     }

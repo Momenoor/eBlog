@@ -6,11 +6,14 @@ use App\Models\Media;
 use Illuminate\Http\Request;
 use App\Http\Requests\MediaStoreRequest;
 use App\Http\Requests\MediaUpdateRequest;
+use App\Models\Article;
+
 class MediaController extends Controller
 {
     public function index()
     {
-        return view('media.index');
+        $media = Media::all();
+        return view('media.index', compact('media'));
     }
 
     /**
@@ -18,7 +21,8 @@ class MediaController extends Controller
      */
     public function create()
     {
-        return view('media.create');
+        $articles = Article::all();
+        return view('media.create', compact('articles'));
     }
 
     /**
@@ -26,7 +30,12 @@ class MediaController extends Controller
      */
     public function store(MediaStoreRequest $request)
     {
-        //
+        try {
+            Media::create($request->all());
+            return redirect()->route('media.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     /**

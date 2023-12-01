@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index');
+        $categorys = Category::all();
+        return view('category.index', compact('categorys'));
     }
 
     /**
@@ -31,15 +32,9 @@ class CategoryController extends Controller
      */
     public function store(CategoriesStoreRequest $request)
     {
-
         try {
-            $data = $request->all();
-
-            $data['created_by'] = Auth::id();
-
-            Category::create($data);
-
-            return redirect()->route('Category.index');
+            Category::create($request->all());
+            return redirect()->route('category.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }

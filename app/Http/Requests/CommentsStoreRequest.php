@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\Article;
 
 class CommentsStoreRequest extends FormRequest
 {
@@ -21,10 +24,15 @@ class CommentsStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->has('body')) {
+            $this->merge([
+                'author_id' => Auth::id(),
+            ]);
+        }
         return [
-            'author_id' => 'integer|exists:users,id',
-            'article_id' => 'integer|exists:articles,id',
-            'body' => 'text',
+            'author_id' => 'required|exists:users,id',
+            'article_id' => 'required|exists:articles,id',
+            'body' => 'required',
         ];
     }
 }

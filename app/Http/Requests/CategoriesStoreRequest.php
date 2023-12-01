@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use PHPUnit\Framework\Constraint\IsTrue;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriesStoreRequest extends FormRequest
 {
@@ -26,12 +27,14 @@ class CategoriesStoreRequest extends FormRequest
         if ($this->has('name')) {
             $this->merge([
                 'slug' => Str::slug($this->name),
+                'created_by' => Auth::id(),
             ]);
         }
+
         return [
             'name' => 'required',
             'slug' => 'required|unique:categories,slug',
-            'description' => 'sometimes|string',
+            'description' => 'nullable|string',
             'created_by' => 'integer|exists:users,id',
 
         ];

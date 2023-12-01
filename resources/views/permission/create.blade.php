@@ -1,47 +1,106 @@
 @extends('layouts.app')
 @section('content')
-<form action="{{route('permissions.store')}}" method="POST">
+<form action="{{route('permission.store')}}" method="POST">
     @csrf
     <div class="card">
-        <div class="card-header">
-            <div class="card-title">
-                <h2>{{__('create_new_permission')}}</h2>
+
+        <div class="card card-flush py-4">
+            <!--begin::Card header-->
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>{{__('create_new_permission')}}</h2>
+                </div>
+
             </div>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12">
-                    <div class="mb-10">
-                        <label for="name" class="form-label fw-bold required">{{__('name')}}</label>
-                        <input name="name" id="name" type="text"
-                            class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" />
+            @if(session('error'))
+            <div class="alert alert-danger">
+                {{session('error')}}
+            </div>
+            @endif
+            <div>
+                @if($errors->any())
+                <ul class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                    <li>
+                        {{$error}}
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row">
+                        <!--begin::Label-->
+                        <label class="required form-label"> Permission Name</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="text" name="name" class="form-control mb-2  @error('name') is-invalid @enderror"
+                            placeholder="Permission Name" value="{{old('name')}}" />
+                        <!--end::Input-->
+                        <!--begin::Description-->
+                        <div class="text-muted fs-7">Permission Name is required and recommended to
+                            be unique.
+                        </div>
                         @error('name')
                         <span class="text-danger">{{$errors->first('name')}}</span>
                         @enderror
+                        <!--end::Description-->
                     </div>
-                    <div class="mb-10">
-                        <label for="description" class="form-label fw-bold">{{__('description')}}</label>
-                        <textarea name="description" id="description"
-                            class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row">
+                        <!--begin::Label-->
+                        <label class="required form-label"> Description</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <textarea type="text" name="description"
+                            class="form-control mb-2  @error('description') is-invalid @enderror"
+                            placeholder="description" value="{{old('description')}}"></textarea>
+                        <!--end::Input-->
+                        <!--begin::Description-->
                         @error('name')
                         <span class="text-danger">{{$errors->first('description')}}</span>
                         @enderror
+                        <!--end::Description-->
                     </div>
-                    <div class="mb-10">
-                        <label for="status" class="form-label fw-bold required">{{__('status')}}</label>
-                        <input name="status" id="status" type="text"
-                            class="form-control @error('status') is-invalid @enderror" value="{{old('status')}}" />
+                    <div class="mb-10 fv-row">
+                        <!--begin::Label-->
+                        <label class="required form-label"> Status Name</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input type="number" name="status"
+                            class="form-control mb-2  @error('status') is-invalid @enderror" placeholder="Status Name"
+                            value="{{old('status')}}" />
+                        <!--end::Input-->
+                        <!--begin::Description-->
+                        <div class="text-muted fs-7">Status Name is required and recommended to
+                            be unique.
+                        </div>
                         @error('name')
                         <span class="text-danger">{{$errors->first('status')}}</span>
                         @enderror
+                        <!--end::Description-->
                     </div>
+                    <!--end::Input group-->
                 </div>
+                <!--end::Card header-->
+            </div>
+            <!--end::General options-->
+            <div class="d-flex justify-content-end">
+                <!--begin::Button-->
+                <a href="{{route('permission.index')}}" id="kt_ecommerce_add_product_cancel"
+                    class="btn btn-light me-5">Cancel</a>
+                <!--end::Button-->
+                <!--begin::Button-->
+                <button type="submit" class="btn btn-primary">
+                    <span class="indicator-label">Save Changes</span>
+                    <span class="indicator-progress">Please wait...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                </button>
+                <!--end::Button-->
             </div>
         </div>
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary me-1">{{__('save')}}</button>
-            <a href="{{route('tags.index')}}" class="btn btn-dark btn-active-dark text-white">{{__('cancel')}}</a>
-        </div>
-    </div>
 </form>
 @endsection

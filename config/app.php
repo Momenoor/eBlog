@@ -5,6 +5,13 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
+
+
+    'option' => [
+        'option1' => 'image',
+        'option2' => 'video',
+        'option3' => 'audio',
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Name

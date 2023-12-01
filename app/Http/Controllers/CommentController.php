@@ -6,12 +6,15 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentsUpdateRequest;
 use App\Http\Requests\CommentsStoreRequest;
+use App\Models\Article;
 
 class CommentController extends Controller
 {
     public function index()
     {
-        return view('comment.index');
+        $comments = Comment::all();
+        $articles = Article::all();
+        return view('comment.index', compact('comments', 'articles'));
     }
 
     /**
@@ -19,7 +22,8 @@ class CommentController extends Controller
      */
     public function create()
     {
-        return view('comment.create');
+        $articles = Article::all();
+        return view('comment.create', compact('articles'));
     }
 
     /**
@@ -27,7 +31,12 @@ class CommentController extends Controller
      */
     public function store(CommentsStoreRequest $request)
     {
-        //
+        try {
+            Comment::create($request->all());
+            return redirect()->route('comment.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     /**

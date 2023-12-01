@@ -30,7 +30,6 @@ class ArticleStoreRequest extends FormRequest
                 "hero_image" => $this->file('image')
             ]);
         }
-
         return [
             'title' => 'required',
             'slug' => 'required|unique:articles,slug',
