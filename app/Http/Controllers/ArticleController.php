@@ -32,7 +32,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleStoreRequest $request)
     {
-        dd($request);
+
         try {
             Article::create($request->all());
             return redirect()->route('article.index');

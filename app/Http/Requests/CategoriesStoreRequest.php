@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use PHPUnit\Framework\Constraint\IsTrue;
 use Illuminate\Support\Str;
@@ -20,19 +21,23 @@ class CategoriesStoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         if ($this->has('name')) {
             $this->merge([
-                'slug' => Str::slug($this->name),
+                'slug' => Str::slug($this->get('name')),
+            ]);
+        }
+        if (auth()->check()) {
+            $this->merge([
                 'created_by' => Auth::id(),
             ]);
         }
 
         return [
-            'name' => 'required',
+            'name' => 'required|unique:categories,name',
             'slug' => 'required|unique:categories,slug',
             'description' => 'nullable|string',
             'created_by' => 'integer|exists:users,id',
