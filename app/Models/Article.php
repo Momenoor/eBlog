@@ -36,13 +36,13 @@ class Article extends Model
     ];
 
     //
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
     //
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class);
     }
@@ -53,13 +53,13 @@ class Article extends Model
     }*/
 
     //
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Tag::class);
     }
 
     //
-    public function heroImage()
+    public function heroImage(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Media::class);
     }

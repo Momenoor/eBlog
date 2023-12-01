@@ -25,8 +25,9 @@ class ArticleStoreRequest extends FormRequest
     {
         if ($this->has('title')) {
             $this->merge([
-                'slug' => Str::slug($this->title),
+                'slug' => Str::slug($this->get('title')),
                 'author_id' => Auth::id(),
+                "hero_image" => $this->file('image')
             ]);
         }
 
@@ -42,7 +43,7 @@ class ArticleStoreRequest extends FormRequest
             'approved_at' => 'date|nullable',
             'published_at' => 'date|nullable',
             'declined_at' => 'date|nullable',
-            //'hero_image_id' => 'image:jpeg,png,jpg,gif,svg',
+            'hero_image' => 'image:jpeg,png,jpg,gif,svg',
         ];
     }
 }

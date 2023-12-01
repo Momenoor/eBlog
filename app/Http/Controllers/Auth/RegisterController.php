@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             //'profile_photo_path' => $this->uploadImage($data['profile_photo_path']),
             //'bio' => 'roles',
-            //'role_id' => 1,
+            'role_id' => null,
         ]);
         return $user;
     }
