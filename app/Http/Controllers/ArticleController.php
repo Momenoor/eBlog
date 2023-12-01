@@ -8,6 +8,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleStoreRequest;
 use App\Http\Requests\ArticleUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -31,21 +32,22 @@ class ArticleController extends Controller
      */
     public function store(ArticleStoreRequest $request)
     {
+        //dd($request);
         try {
-            $article = new Article();
-            $article->title = $request->title;
-            $article->slug = $request->slug;
-            $article->body = $request->body;
-            $article->status = $request->status;
-            $article->is_pinned = $request->is_pinned;
-            $article->hero_image_id = $request->hero_image_id;
-            $article->save();
+            Article::create($request->all());
             return redirect()->route('article.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
 
+    protected function uploadImage($image)
+    {
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path('images'), $imageName);
+        return $imageName;
+    }
+    //$article->tags()->attach($request->input('tags'));
 
     /**
      * Display the specified resource.

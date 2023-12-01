@@ -17,6 +17,7 @@ class Article extends Model
         'slug',
         'body',
         'author_id',
+        'category_id',
         'status',
         'is_pinned',
         'submitted_at',

@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesStoreRequest;
 use App\Http\Requests\CategoriesUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -30,8 +31,14 @@ class CategoryController extends Controller
      */
     public function store(CategoriesStoreRequest $request)
     {
+
         try {
-            Category::create($request->all());
+            $data = $request->all();
+
+            $data['created_by'] = Auth::id();
+
+            Category::create($data);
+
             return redirect()->route('Category.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);

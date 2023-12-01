@@ -26,7 +26,6 @@ class CategoriesStoreRequest extends FormRequest
         if ($this->has('name')) {
             $this->merge([
                 'slug' => Str::slug($this->name),
-                'created_by' => 1,
             ]);
         }
         return [
