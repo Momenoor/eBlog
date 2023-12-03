@@ -22,11 +22,11 @@ class MediaUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'type'=>'required',
-            'path'=>'required',
-            'size'=>'required',
-            'article_id'=>'integer|exists:articles,id',
+            'name' => 'required',
+            'type' => 'required',
+            'path' => 'required',
+            'size' => 'required',
+            'article_id' => 'integer|exists:articles,id',
         ];
     }
 }

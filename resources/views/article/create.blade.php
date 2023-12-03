@@ -138,7 +138,7 @@
                                             <!--end::Icon-->
                                             <!--begin::Inputs-->
                                             <input type="file" name="hero_image_id" accept="image" />
-                                            <input type="hidden" name="hero_image_id" />
+                                            <input type="hidden" name="hero_image_id" accept="image" />
                                             <!--end::Inputs-->
                                         </label>
                                         <!--end::Label-->

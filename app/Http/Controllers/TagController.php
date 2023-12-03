@@ -39,7 +39,7 @@ class TagController extends Controller
         }
     }
 
-    public function show(Tag $tags)
+    public function show(Tag $tag)
     {
         return view('tag.view');
     }
@@ -47,24 +47,31 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tag $tags)
+    public function edit(Tag $tag)
     {
-        return view('tag.edit');
+        return view('tag.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(TagsUpdateRequest $request, Tag $tags)
+    public function update(TagsUpdateRequest $request, Tag $tag)
     {
-        //
+        try {
+            $tag->fill($request->all());
+            $tag->save();
+            return redirect()->route('tag.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tag $tags)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route('tag.index');
     }
 }

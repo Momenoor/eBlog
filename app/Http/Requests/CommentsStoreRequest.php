@@ -24,7 +24,7 @@ class CommentsStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->has('body')) {
+        if (auth()->check()) {
             $this->merge([
                 'author_id' => Auth::id(),
             ]);

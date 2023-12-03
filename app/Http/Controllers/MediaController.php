@@ -12,8 +12,8 @@ class MediaController extends Controller
 {
     public function index()
     {
-        $media = Media::all();
-        return view('media.index', compact('media'));
+        $_media = Media::all();
+        return view('media.index', compact('_media'));
     }
 
     /**
@@ -38,20 +38,17 @@ class MediaController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
+
     public function show(Media $media)
     {
         return view('media.view');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Media $media)
     {
-        return view('media.edit');
+        $articles = Article::all();
+        return view('media.edit', compact('media', 'articles'));
     }
 
     /**
@@ -59,7 +56,6 @@ class MediaController extends Controller
      */
     public function update(MediaUpdateRequest $request, Media $media)
     {
-        //
     }
 
     /**
@@ -67,6 +63,8 @@ class MediaController extends Controller
      */
     public function destroy(Media $media)
     {
-        //
+
+        $media->delete();
+        return redirect()->route('media.index');
     }
 }

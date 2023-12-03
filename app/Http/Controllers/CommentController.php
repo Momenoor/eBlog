@@ -50,24 +50,32 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comment $comments)
+    public function edit(Comment $comment)
     {
-        return view('comment.edit');
+        $articles = Article::all();
+        return view('comment.edit', compact('comment', 'articles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CommentsStoreRequest $request, Comment $comments)
+    public function update(CommentsStoreRequest $request, Comment $comment)
     {
-        //
+        try {
+            $comment->fill($request->all());
+            $comment->save();
+            return redirect()->route('comment.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comments)
+    public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->route('comment.index');
     }
 }

@@ -42,7 +42,7 @@ class PermissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Permission $permissions)
+    public function show(Permission $permission)
     {
         return view('permission.view');
     }
@@ -50,24 +50,31 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Permission $permissions)
+    public function edit(Permission $permission)
     {
-        return view('permission.edit');
+        return view('permission.edit', compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(PermissionUpdateRequest $request, Permission $permissions)
+    public function update(PermissionUpdateRequest $request, Permission $permission)
     {
-        //
+        try {
+            $permission->fill($request->all());
+            $permission->save();
+            return redirect()->route('permission.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Permission $permissions)
+    public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return redirect()->route('permission.index');
     }
 }

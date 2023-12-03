@@ -81,7 +81,7 @@
                                                 id="kt_ecommerce_add_category_status_select" name="article_id">
                                                 <option></option>
                                                 @foreach($articles as $article)
-                                                <option @selected(old('category_id')==$article->id)
+                                                <option @selected(old('article_id')==$article->id)
                                                     value="{{$article->id}}">{{$article->title}}</option>
                                                 @endforeach
                                             </select>

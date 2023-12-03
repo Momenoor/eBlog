@@ -22,7 +22,7 @@ class PermissionStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->has('name')) {
+        if (auth()->check()) {
             $this->merge([
                 'created_by' => Auth::id(),
             ]);

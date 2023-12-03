@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PermissionUpdateRequest extends FormRequest
 {
@@ -21,11 +22,16 @@ class PermissionUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+
+
+
+
+
         return [
-            'name'=>'required',
-            'description'=>'text',
-            'created_by'=>'integer:exists:users,id',
-            'status'=>'required'
+            'name' => 'required|unique',
+            'description' => 'string',
+            'status' => 'required'
+
         ];
     }
 }
