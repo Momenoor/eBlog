@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UploadImageJob;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Media;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleStoreRequest;
 use App\Http\Requests\ArticleUpdateRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -24,31 +27,55 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $tags = Tag::all()->pluck('name')->implode(',');
+        $tags = Tag::all();
         return view('article.create', compact('categories', 'tags'));
     }
 
     /**
      * Store a newly created resource in storage.
+     * @throws \Exception
      */
     public function store(ArticleStoreRequest $request)
     {
+        DB::beginTransaction();
 
         try {
-            Article::create($request->all());
-            return redirect()->route('article.index');
+            // create article
+            $article = Article::create($request->all());
+
+            // get tags from request
+            $tags = $request->get('tags');
+
+            // sync tags with article
+            $article->tags()->sync($tags);
+
+            // upload image to storage and update article with image id
+            if ($request->hasFile('image')) {
+
+                $image = $request->file('image');
+                $imageName = $article->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
+                $size = $image->getSize();
+                $image->move(public_path('images/'), $imageName);
+                $media = Media::create([
+                    'path' => 'images/' . $imageName,
+                    'name' => $imageName,
+                    'type' => $image->getClientOriginalExtension(),
+                    'size' => $size,
+                    'article_id' => $article->id,
+                ]);
+
+                $article->update([
+                    'hero_image_id' => $media->id,
+                ]);
+            }
+            DB::commit();
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+            DB::rollback();
+            dd($e);
+        } finally { // redirect to index
+            return redirect()->route('article.index');
         }
     }
-
-    protected function uploadImage($image)
-    {
-        $imageName = time() . '.' . $image->extension();
-        $image->move(public_path('images'), $imageName);
-        return $imageName;
-    }
-    //$article->tags()->attach($request->input('tags'));
 
     /**
      * Display the specified resource.

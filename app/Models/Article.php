@@ -27,7 +27,7 @@ class Article extends Model
         'hero_image_id',
     ];
 
-    protected $casts =  [
+    protected $casts = [
         'is_pinned' => 'boolean', // bool True or False
         'submitted_at' => 'datetime',
         'approved_at' => 'datetime',
@@ -48,19 +48,20 @@ class Article extends Model
     }
 
     //
-    /*public function author(){
-        return $this->belongsTo('App\Models\Author','author_id');
-    }*/
-
-    //
-    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasMany(Tag::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     //
-    public function heroImage(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function tags(): \Illuminate\Database\Eloquent\Relations\belongsToMany
     {
-        return $this->hasMany(Media::class);
+        return $this->belongsToMany(Tag::class);
+    }
+
+    //
+    public function heroImage(): \Illuminate\Database\Eloquent\Relations\belongsTo
+    {
+        return $this->belongsTo(Media::class, 'hero_image_id');
     }
 }

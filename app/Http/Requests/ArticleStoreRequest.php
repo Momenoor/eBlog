@@ -26,10 +26,23 @@ class ArticleStoreRequest extends FormRequest
         if ($this->has('title')) {
             $this->merge([
                 'slug' => Str::slug($this->get('title')),
-                'author_id' => Auth::id(),
-                "hero_image" => $this->file('image')
             ]);
         }
+        if (auth()->check()) {
+            $this->merge([
+                'author_id' => auth()->user()->id,
+            ]);
+        }
+
+        $this->merge([
+            'status' => 0,
+            'is_pinned' => 0,
+            'submitted_at' => $this->get('submitted_at') ?? now(),
+            'approved_at' => null,
+            'published_at' => null,
+            'declined_at' => null,
+        ]);
+
         return [
             'title' => 'required',
             'slug' => 'required|unique:articles,slug',
@@ -42,7 +55,8 @@ class ArticleStoreRequest extends FormRequest
             'approved_at' => 'date|nullable',
             'published_at' => 'date|nullable',
             'declined_at' => 'date|nullable',
-            'hero_image' => 'image:jpeg,png,jpg,gif,svg',
+            'hero_image_id' => 'sometimes|required',
+            'tags.*' => 'exists:tags,id',
         ];
     }
 }

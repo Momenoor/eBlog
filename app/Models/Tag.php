@@ -16,8 +16,8 @@ class Tag extends Model
     ];
 
     //
-    public function articles()
+    public function articles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Article::class);
+        return $this->belongsToMany(Article::class);
     }
 }
