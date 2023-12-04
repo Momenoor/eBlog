@@ -80,9 +80,9 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $articles)
+    public function show(Article $article)
     {
-        return view('article.view');
+        return view('article.view', compact('article'));
     }
 
     /**
