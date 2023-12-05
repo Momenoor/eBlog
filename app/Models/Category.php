@@ -20,13 +20,13 @@ class Category extends Model
 
     //
 
-    public function articles()
+    public function articles(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Article::class);
     }
 
     //
-    public function createdBy()
+    public function createdBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }

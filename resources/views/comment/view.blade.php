@@ -1,7 +1,11 @@
 <div class="d-flex pt-6">
     <!--begin::Avatar-->
     <div class="symbol symbol-45px me-5">
-        <img src="{{asset($comment->author->profile_picture)}}" alt="{{$comment->author->name}}">
+        @if($comment->author->profile_picture == null)
+            <img src="{{asset('assets/media/avatars/blank.png')}}" alt="{{$comment->author->name}}">
+        @else
+            <img src="{{asset($comment->author->profile_picture)}}" alt="{{$comment->author->name}}">
+        @endif
     </div>
     <!--end::Avatar-->
     <!--begin::Wrapper-->

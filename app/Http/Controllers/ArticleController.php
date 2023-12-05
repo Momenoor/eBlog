@@ -84,7 +84,10 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('article.view', compact('article'));
+        $categories = Category::withCount('articles')->get();
+        $recentArticles = Article::latest()->take(4)->get();
+        $recentArticles->load(['comments', 'tags', 'heroImage']);
+        return view('article.view', compact('article', 'categories', 'recentArticles'));
     }
 
     /**

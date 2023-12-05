@@ -38,12 +38,15 @@ class Article extends Model
 
     protected $with = [
         'category',
-
         'author',
         'tags',
         'heroImage',
     ];
 
+    public function resolveRouteBinding($value, $field = null): Article|Model|null
+    {
+        return $this->withCount('comments')->where($field ?? $this->getRouteKeyName(), $value)->first();
+    }
     //
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

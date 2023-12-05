@@ -33,9 +33,12 @@ class CommentController extends Controller
     {
         $comment = $article->comments()->create($request->all());
 
-        return response()->turboStream()->append(
-            view('comment._turbo', ['comment' => $comment])->render()
-        );
+        if (request()->wantsTurboStream()) {
+            return turbo_stream()->target('commentsList')
+                ->action('append')->view('comment._turbo', ['comment' => $comment]);;
+        }
+
+        return back();
     }
 
     /**
