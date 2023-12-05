@@ -1,3 +1,3 @@
-import '../plugins/global/plugins.bundle.css';
-import '../css/style.bundle.css';
-
+import './bootstrap';
+import './elements/turbo-echo-stream-tag';
+import './libs';

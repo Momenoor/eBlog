@@ -26,12 +26,12 @@ class CommentsStoreRequest extends FormRequest
     {
         if (auth()->check()) {
             $this->merge([
-                'author_id' => Auth::id(),
+                'author_id' => auth()->user()->id,
             ]);
         }
         return [
             'author_id' => 'required|exists:users,id',
-            'article_id' => 'required|exists:articles,id',
+            'article_id' => 'sometimes|required|exists:articles,id',
             'body' => 'required',
         ];
     }

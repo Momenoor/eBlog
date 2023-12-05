@@ -20,4 +20,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Article::class, 'aricle_id');
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 }

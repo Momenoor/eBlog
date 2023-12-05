@@ -29,14 +29,13 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CommentsStoreRequest $request)
+    public function store(CommentsStoreRequest $request, Article $article)
     {
-        try {
-            Comment::create($request->all());
-            return redirect()->route('comment.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
-        }
+        $comment = $article->comments()->create($request->all());
+
+        return response()->turboStream()->append(
+            view('comment._turbo', ['comment' => $comment])->render()
+        );
     }
 
     /**

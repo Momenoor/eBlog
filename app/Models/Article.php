@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Media;
+use Illuminate\Support\Str;
 
 class Article extends Model
 {
@@ -33,6 +34,14 @@ class Article extends Model
         'approved_at' => 'datetime',
         'published_at' => 'datetime',
         'declined_at' => 'datetime',
+    ];
+
+    protected $with = [
+        'category',
+
+        'author',
+        'tags',
+        'heroImage',
     ];
 
     //
@@ -63,5 +72,10 @@ class Article extends Model
     public function heroImage(): \Illuminate\Database\Eloquent\Relations\belongsTo
     {
         return $this->belongsTo(Media::class, 'hero_image_id');
+    }
+
+    public function excerpt()
+    {
+        return Str::limit($this->body, 250);
     }
 }
