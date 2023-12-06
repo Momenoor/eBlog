@@ -1,0 +1,1 @@
+@include('tag.view', ['tags' => $tags])

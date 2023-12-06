@@ -32,12 +32,18 @@ class CategoryController extends Controller
      */
     public function store(CategoriesStoreRequest $request): \Illuminate\Http\RedirectResponse
     {
-        try {
-            Category::create($request->all());
-            return redirect()->route('category.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        //try {
+        //    Category::create($request->all());
+        //    return redirect()->route('category.index');
+        //} catch (\Exception $e) {
+        //    return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        //}
+        $categories = Category::create($request->all());
+        if (request()->wantsTurboStream()) {
+            return turbo_stream()->target('commentsList')
+                ->action('append')->view('category._turbo', ['categories' => $categories]);
         }
+        return back();
     }
 
     /**
@@ -68,8 +74,6 @@ class CategoryController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-
-
     }
 
     /**

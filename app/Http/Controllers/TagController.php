@@ -31,12 +31,13 @@ class TagController extends Controller
      */
     public function store(TagsStoreRequest $request)
     {
-        try {
-            Tag::create($request->all());
-            return redirect()->route('tag.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+
+        $tags = Tag::create($request->all());
+        if (request()->wantsTurboStream()) {
+            return turbo_stream()->target('commentsList')
+                ->action('append')->view('tag._turbo', ['tags' => $tags]);
         }
+        return back();
     }
 
     public function show(Tag $tag)

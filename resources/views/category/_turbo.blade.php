@@ -1,0 +1,1 @@
+@include('category.view', ['categories' => $categories])

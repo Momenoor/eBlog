@@ -32,10 +32,9 @@ class CommentController extends Controller
     public function store(CommentsStoreRequest $request, Article $article)
     {
         $comment = $article->comments()->create($request->all());
-
         if (request()->wantsTurboStream()) {
             return turbo_stream()->target('commentsList')
-                ->action('append')->view('comment._turbo', ['comment' => $comment]);;
+                ->action('append')->view('comment._turbo', ['comment' => $comment]);
         }
 
         return back();
