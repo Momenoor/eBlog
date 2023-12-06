@@ -1,1 +1,1 @@
-@include('category.view', ['categories' => $categories])
+@include('category.view', ['category' => $category])

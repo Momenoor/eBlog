@@ -1,1 +1,1 @@
-@include('tag.view', ['tags' => $tags])
+@include('tag.view', ['tag' => $tag])

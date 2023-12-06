@@ -32,10 +32,10 @@ class TagController extends Controller
     public function store(TagsStoreRequest $request)
     {
 
-        $tags = Tag::create($request->all());
+        $tag = Tag::create($request->all());
         if (request()->wantsTurboStream()) {
-            return turbo_stream()->target('commentsList')
-                ->action('append')->view('tag._turbo', ['tags' => $tags]);
+            return turbo_stream()->target('tagsList')
+                ->action('append')->view('tag._turbo', ['tag' => $tag]);
         }
         return back();
     }

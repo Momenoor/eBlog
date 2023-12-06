@@ -30,18 +30,12 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoriesStoreRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(CategoriesStoreRequest $request)
     {
-        //try {
-        //    Category::create($request->all());
-        //    return redirect()->route('category.index');
-        //} catch (\Exception $e) {
-        //    return redirect()->back()->withErrors(['message' => $e->getMessage()]);
-        //}
-        $categories = Category::create($request->all());
+        $category = Category::create($request->all());
         if (request()->wantsTurboStream()) {
-            return turbo_stream()->target('commentsList')
-                ->action('append')->view('category._turbo', ['categories' => $categories]);
+            return turbo_stream()->target('categoriesList')
+                ->action('append')->view('category._turbo', ['category' => $category]);
         }
         return back();
     }
@@ -59,7 +53,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('category.edit', compact('category'));
+        return view('category.index', compact('category'));
     }
 
     /**
