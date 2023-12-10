@@ -68,31 +68,26 @@
             <table class="table align-middle table-row-dashed fs-6 gy-5 " id="kt_ecommerce_products_table">
                 <thead>
                     <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase">
-                        <th class="text-end ">#</th>
-                        <th class="text-end ">Name</th>
-                        <th class="text-end ">Description</th>
-                        <th class="text-end ">Created_By</th>
-                        <th class="text-end ">Actions</th>
+                        <th class=" ">#</th>
+                        <th class="">Name</th>
+                        <th class="">Description</th>
+                        <th class="">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="fw-semibold text-gray-600">
                     <tr>
                         @foreach($permissions as $permission)
-                        <td class="text-end pe-0">
+                        <td class=" pe-0">
                             <span class="fw-bold">{{$permission->id}}</span>
                         </td>
-                        <td class="text-end pe-0">
+                        <td class=" pe-0">
                             <span class="fw-bold">{{$permission->name}}</span>
                         </td>
-                        <td class="text-end pe-0">
-                            <span class="fw-bold">{{$permission->description}}</span>
+                        <td class=" pe-0">
+                            <span class="fw-bold">{{$permission->guard_name}}</span>
                         </td>
-                        <td class="text-end pe-0">
-                            <!--begin::Badges-->
-                            <span class="fw-bold">{{$permission->created_by}}</span>
-                            <!--end::Badges-->
-                        </td>
-                        <td class="text-end ml-10">
+
+                        <td class=" ml-10">
                             <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
                                 data-kt-menu-trigger="click">
                                 Actions

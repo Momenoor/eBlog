@@ -23,7 +23,7 @@ class RolesUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|unique',
-            'description' => 'string',
+            'permission' => 'required',
         ];
     }
 }

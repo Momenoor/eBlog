@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class ArticleUpdateRequest extends FormRequest
 {
@@ -21,18 +22,32 @@ class ArticleUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->has('title')) {
+            $this->merge([
+                'slug' => Str::slug($this->get('title')),
+            ]);
+        }
+        if (auth()->check()) {
+            $this->merge([
+                'author_id' => auth()->user()->id,
+            ]);
+        }
+
         return [
-            'title' => 'required',
-            'slug' => 'required|unique:articles,slug,'.$this->id.',id',
+            'title' => 'required|unique:articles,title,' . $this->article->id,
+            'slug' => 'required|unique:articles,slug,' . $this->article->id,
             'body' => 'required',
             'author_id' => 'required|exists:users,id',
-            'status' => 'required|integer',
-            'is_pinned'=>'required|boolean',
-            'submitted_at'=>'date',
-            'approved_at'=>'date',
-            'published_at'=>'date',
-            'declined_at'=>'date',
-            'hero_image_id'=>'image:jpeg,png,jpg,gif,svg',
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'integer',
+            'is_pinned' => 'boolean',
+            'submitted_at' => 'date|nullable',
+            'approved_at' => 'date|nullable',
+            'published_at' => 'date|nullable',
+            'declined_at' => 'date|nullable',
+            'hero_image_id' => 'sometimes|required',
+            'tags.*' => 'exists:tags,id',
+
         ];
     }
 }

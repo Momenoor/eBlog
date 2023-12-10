@@ -29,8 +29,7 @@ class PermissionUpdateRequest extends FormRequest
 
         return [
             'name' => 'required|unique',
-            'description' => 'string',
-            'status' => 'required'
+            'guard_name' => 'string',
 
         ];
     }

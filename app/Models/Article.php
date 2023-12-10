@@ -60,6 +60,7 @@ class Article extends Model
     }
 
     //
+
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');

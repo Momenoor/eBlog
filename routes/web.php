@@ -30,5 +30,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('media', App\Http\Controllers\MediaController::class);
     Route::resource('user', App\Http\Controllers\UserController::class);
     Route::post('article/{article}/comment', [CommentController::class, 'store'])->name('article.create.comment');
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
 });
-

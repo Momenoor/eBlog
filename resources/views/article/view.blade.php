@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div id="kt_app_content" class="app-content  flex-column-fluid ">
+
     <!--begin::Post card-->
     <!--begin::Post card-->
     <div class="card">
@@ -90,7 +91,12 @@
                             <!--end::Text-->
                         </div>
                         <!--end::Description-->
-
+                        <div class="d-flex justify-content-end">
+                            @if ($isAuthor)
+                            <a class="btn btn-sm btn-primary" href="{{ route('article.edit', $article->id) }}">Edit
+                                Article</a>
+                            @endif
+                        </div>
                         <!--begin::Block-->
                         <div class="d-flex align-items-center border-1 border-dashed card-rounded p-5 p-lg-10 mb-14">
                             <!--begin::Section-->
@@ -228,6 +234,9 @@
                     <!--end::Post content-->
                 </div>
                 <!--end::Content-->
+
+
+
 
                 <!--begin::Sidebar-->
                 <div class="flex-column flex-lg-row-auto w-100 w-xl-300px mb-10">

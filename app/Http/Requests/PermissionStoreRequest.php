@@ -22,16 +22,10 @@ class PermissionStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        if (auth()->check()) {
-            $this->merge([
-                'created_by' => Auth::id(),
-            ]);
-        }
+
         return [
             'name' => 'required',
-            'description' => 'required',
-            'created_by' => 'integer:exists:users,id',
-            'status' => 'required'
+            'guard_name' => 'required',
 
         ];
     }

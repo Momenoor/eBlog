@@ -12,6 +12,8 @@ use App\Http\Requests\ArticleStoreRequest;
 use App\Http\Requests\ArticleUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
@@ -84,33 +86,100 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+
         $categories = Category::withCount('articles')->get();
         $recentArticles = Article::latest()->take(4)->get();
         $recentArticles->load(['comments', 'tags', 'heroImage']);
-        return view('article.view', compact('article', 'categories', 'recentArticles'));
+        $loggedInUser = Auth::user();
+        $isAuthor = ($loggedInUser && $loggedInUser->id === $article->author_id);
+        return view('article.view', compact('article', 'categories', 'recentArticles', 'isAuthor'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $articles)
+    public function edit(Article $article)
     {
-        return view('article.edit');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('article.edit', compact('categories', 'tags', 'article'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ArticleUpdateRequest $request, Article $articles)
+    public function update(ArticleUpdateRequest $request, Article $article)
     {
-        //
+
+        DB::beginTransaction();
+
+        try {
+            $article->fill($request->all());
+
+            // Sync tags
+            $article->tags()->sync($request->input('tags', []));
+
+            // Check if a new image is uploaded
+            if ($request->hasFile('image')) {
+                $oldMedia = $article->heroImage;
+
+                // Upload the new image
+                $image = $request->file('image');
+                $imageName = $article->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
+                $size = $image->getSize();
+                $image->move(public_path('images/'), $imageName);
+
+                // Create a new Media entry
+                $media = Media::create([
+                    'path' => 'images/' . $imageName,
+                    'name' => $imageName,
+                    'type' => $image->getClientOriginalExtension(),
+                    'size' => $size,
+                    'article_id' => $article->id,
+                ]);
+
+                // Update the article with the new image
+                $article->update([
+                    'hero_image_id' => $media->id,
+                ]);
+
+                // Delete the old image file and Media entry
+                if ($oldMedia) {
+                    File::delete(public_path($oldMedia->path));
+                    $oldMedia->delete();
+                }
+            }
+
+            $article->save();
+
+            DB::commit();
+
+            return redirect()->route('article.index');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $articles)
+    public function destroy(Article $article)
     {
-        //
+        /*  // Update article details */
+        /*  $article->update([ */
+        /*      'title' => $request->input('title'), */
+        /*      'body' => $request->input('body'), */
+        /*      'category_id' => $request->input('category_id'), */
+        /*      'published_at' => $request->input('published_at'), */
+        /*  ]); */
+        /*  // Update tags */
+        /*  $article->tags()->sync($request->input('tags', [])); */
+        /*  // Update image if provided */
+        /*  if ($request->hasFile('image')) { */
+        /*      // Handle image upload and update the article's image path */
+        /*      $imagePath = $this->uploadImage($request->file('image')); */
+        /*      $article->heroImage()->update(['path' => $imagePath]); */
+        /*  } */
     }
 }

@@ -52,37 +52,21 @@
                     <!--begin::Input group-->
                     <div class="mb-10 fv-row">
                         <!--begin::Label-->
-                        <label class="required form-label"> Description</label>
+                        <label class="required form-label"> Guard Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <textarea type="text" name="description"
-                            class="form-control mb-2  @error('description') is-invalid @enderror"
-                            placeholder="description" value="{{old('description')}}"></textarea>
+                        <input type="text" name="guard_name"
+                            class="form-control mb-2  @error('guard_name') is-invalid @enderror"
+                            placeholder="Guard Name" value="{{old('guard_name')}}" />
+
                         <!--end::Input-->
                         <!--begin::Description-->
-                        @error('name')
-                        <span class="text-danger">{{$errors->first('description')}}</span>
+                        @error('guard_name')
+                        <span class="text-danger">{{$errors->first('guard_name')}}</span>
                         @enderror
                         <!--end::Description-->
                     </div>
-                    <div class="mb-10 fv-row">
-                        <!--begin::Label-->
-                        <label class="required form-label"> Status Name</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <input type="number" name="status"
-                            class="form-control mb-2  @error('status') is-invalid @enderror" placeholder="Status Name"
-                            value="{{old('status')}}" />
-                        <!--end::Input-->
-                        <!--begin::Description-->
-                        <div class="text-muted fs-7">Status Name is required and recommended to
-                            be unique.
-                        </div>
-                        @error('name')
-                        <span class="text-danger">{{$errors->first('status')}}</span>
-                        @enderror
-                        <!--end::Description-->
-                    </div>
+
                     <!--end::Input group-->
                 </div>
                 <!--end::Card header-->
