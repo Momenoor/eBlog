@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PermissionUpdateRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -28,8 +29,8 @@ class PermissionUpdateRequest extends FormRequest
 
 
         return [
-            'name' => 'required|unique',
-            'guard_name' => 'string',
+            'name' => 'required|unique:permissions,name,' . $this->permission->id,
+            'guard_name' => 'string|nullable',
 
         ];
     }

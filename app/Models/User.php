@@ -50,23 +50,15 @@ class User extends Authenticatable
     ];
 
     //
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Category::class, 'created_by');
     }
 
-    public function articles()
+    public function articles(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Article::class, 'author_id');
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
 
-    //public function permission()
-    //{
-    //    return $this->hasMany(Permission::class);
-    //}
 }

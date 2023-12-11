@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permission;
-use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use App\Http\Requests\PermissionStoreRequest;
 use App\Http\Requests\PermissionUpdateRequest;
 
@@ -14,7 +13,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::with('roles')->get();
         return view('permission.index', compact('permissions'));
     }
 

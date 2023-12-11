@@ -24,9 +24,8 @@ class PermissionStoreRequest extends FormRequest
     {
 
         return [
-            'name' => 'required',
-            'guard_name' => 'required',
-
+            'name' => 'required|unique:permissions,name',
+            'guard_name' => 'sometimes|string|nullable',
         ];
     }
 }

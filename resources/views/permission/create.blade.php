@@ -33,10 +33,10 @@
                     <!--begin::Input group-->
                     <div class="mb-10 fv-row">
                         <!--begin::Label-->
-                        <label class="required form-label"> Permission Name</label>
+                        <label for="name" class="required form-label"> Permission Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" name="name" class="form-control mb-2  @error('name') is-invalid @enderror"
+                        <input id="name" type="text" name="name" class="form-control mb-2  @error('name') is-invalid @enderror"
                             placeholder="Permission Name" value="{{old('name')}}" />
                         <!--end::Input-->
                         <!--begin::Description-->
@@ -52,10 +52,10 @@
                     <!--begin::Input group-->
                     <div class="mb-10 fv-row">
                         <!--begin::Label-->
-                        <label class="required form-label"> Guard Name</label>
+                        <label for="guard_name" class="form-label"> Guard Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" name="guard_name"
+                        <input id="guard_name" type="text" name="guard_name"
                             class="form-control mb-2  @error('guard_name') is-invalid @enderror"
                             placeholder="Guard Name" value="{{old('guard_name')}}" />
 
