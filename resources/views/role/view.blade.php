@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <!--begin::Wrapper-->
 <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
 
@@ -1782,3 +1784,8 @@
 
             </div>
             <!--end::Content wrapper-->
+
+        </div>
+    </div>
+</div>
+@endsection
