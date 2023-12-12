@@ -36,17 +36,19 @@ class RoleController extends Controller
     }
 */
 
-    public function index(Request $request)
+    public function index()
     {
-        $roles = Role::with(['permissions', 'users'])->orderBy('id', 'DESC')->paginate(5);
+        $roles = Role::with(['permissions', 'users'])->orderBy('id', 'DESC')->get();
+
         $permissions = Permission::all()->map(function ($permission) {
             [$category, $action] = explode('-', $permission->name);
-            return [Str::ucfirst($category) => ['permission' => $permission, 'action' => $action]];
+            return [$category => ['permission' => $permission, 'action' => $action]];
         })->reduce(function ($carry, $item) {
             $key = array_key_first($item);
             $carry[$key][] = $item[$key];
             return $carry;
         }, []);
+
 
         return view('role.index', compact('roles', 'permissions'));
     }
@@ -60,33 +62,11 @@ class RoleController extends Controller
     public function store(RolesStoreRequest $request)
     {
 
-        /*
-        $role = Role::create(['name' => $request->input('name')]);
-        dd($request->input('permissions'));
-        $role->syncPermissions($request->input('permissions'));
-        $role->syncPermissions($request->input('permissions'), 'web');
-        */
-
         // Create a new role
         $role = Role::create($request->all());
-
-        // Get permissions for create, edit, and delete separately
-        $createPermissions = $request->input('permissions.create', []);
-        $editPermissions = $request->input('permissions.edit', []);
-        $deletePermissions = $request->input('permissions.delete', []);
-
-        // Attach the permissions for each action separately
-        $this->syncPermissions($role, $createPermissions, 'create');
-        $this->syncPermissions($role, $editPermissions, 'edit');
-        $this->syncPermissions($role, $deletePermissions, 'delete');
-
+        $role->syncPermissions($request->get('permissions'));
 
         return redirect()->route('role.index');
-    }
-
-    private function syncPermissions(Role $role, array $permissions, string $action)
-    {
-        $role->syncPermissions($permissions, $action);
     }
 
     public function show($id)
@@ -107,37 +87,28 @@ class RoleController extends Controller
 
         $role = Role::find($id);
 
-        $permission = Permission::get();
+        $permission = Permission::all();
 
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-
-        return view('roles.edit', compact('role', 'permission', 'rolePermissions'));
+        return view('role.index', compact('role', 'permission'));
     }
 
 
-    public function update(RolesUpdateRequest $request, $id)
-
+    public function update(RolesUpdateRequest $request, Role $role)
     {
-
-        $role = Role::find($id);
-
-        $role->name = $request->input('name');
+        dd($role);
+        $role->fill($request->all());
 
         $role->save();
-        $role->syncPermissions($request->input('permission'));
+        $role->syncPermissions($request->get('permissions'));
 
-        return redirect()->route('roles.index')
-            ->with('success', 'Role updated successfully');
+        return redirect()->route('role.index');
     }
 
 
-    public function destroy($id)
+    public function destroy(Role $role)
 
     {
-
-        DB::table("roles")->where('id', $id)->delete();
+        DB::table("roles")->where('id', $role->id)->delete();
 
         return redirect()->route('roles.index')
             ->with('success', 'Role deleted successfully');
