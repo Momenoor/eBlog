@@ -22,11 +22,11 @@ class RoleController extends Controller
 
 {
 
-    /*  function __construct()
+    /* function __construct()
 
     {
 
-        $this->middleware('permission:Create-Article|Edit-Article|Create-Role|Delete-Article', ['only' => ['index', 'store']]);
+        $this->middleware('permission:article-create|Edit-Article|Create-Role|Delete-Article', ['only' => ['index', 'store']]);
 
         $this->middleware('permission:Create-Article', ['only' => ['create', 'store']]);
 
@@ -34,8 +34,8 @@ class RoleController extends Controller
 
         $this->middleware('permission:Delete-Article', ['only' => ['destroy']]);
     }
-*/
 
+*/
     public function index()
     {
         $roles = Role::with(['permissions', 'users'])->orderBy('id', 'DESC')->get();
@@ -56,7 +56,7 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view('role.index', compact('permissions' ));
+        return view('role.index', compact('permissions'));
     }
 
     public function store(RolesStoreRequest $request)
@@ -74,10 +74,16 @@ class RoleController extends Controller
 
         $role = Role::find($id);
 
-        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
-            ->where("role_has_permissions.role_id", $id)
-            ->get();
-        return view('role.view', compact('role', 'rolePermissions'));
+        $permissions = Permission::all()->map(function ($permission) {
+            [$category, $action] = explode('-', $permission->name);
+            return [$category => ['permission' => $permission, 'action' => $action]];
+        })->reduce(function ($carry, $item) {
+            $key = array_key_first($item);
+            $carry[$key][] = $item[$key];
+            return $carry;
+        }, []);
+
+        return view('role.view', compact('role', 'permissions'));
     }
 
 

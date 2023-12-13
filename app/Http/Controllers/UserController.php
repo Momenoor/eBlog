@@ -33,11 +33,9 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name', 'name')->all();
 
+        $users = User::latest()->paginate(5);
 
-        $data = User::orderBy('id', 'DESC')->paginate(5);
-
-
-        return view('users.index', compact('data', 'roles'))
+        return view('users.index', compact('users', 'roles'))
 
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -47,11 +45,9 @@ class UserController extends Controller
 
     {
         $roles = Role::pluck('name', 'name')->all();
+        $users = User::latest()->paginate(5);
 
-
-        $data = User::orderBy('id', 'DESC')->paginate(5);
-
-        return view('users.index', compact('data', 'roles'));
+        return view('users.index', compact('users', 'roles'));
     }
 
 
@@ -60,11 +56,10 @@ class UserController extends Controller
     {
 
         $input = $request->all();
-
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        $user->assignRole($request->input('role_id'));
         return redirect()->route('users.index');
     }
 
@@ -75,8 +70,9 @@ class UserController extends Controller
     {
 
         $user = User::find($id);
+        $roles = Role::pluck('name', 'name')->all();
 
-        return view('users.view', compact('user'));
+        return view('users.view', compact('user', 'roles'));
     }
 
 
@@ -89,11 +85,11 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
 
         $userRole = $user->roles->pluck('name', 'name')->all();
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return view('users.index', compact('user', 'roles', 'userRole'));
     }
 
 
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, User $user)
 
     {
         $input = $request->all();
@@ -106,13 +102,9 @@ class UserController extends Controller
             $input = Arr::except($input, array('password'));
         }
 
-        $user = User::find($id);
-
         $user->update($input);
 
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-
-        $user->assignRole($request->input('roles'));
+        $user->syncRoles($request->input('roles'));
         return redirect()->route('users.index');
     }
 

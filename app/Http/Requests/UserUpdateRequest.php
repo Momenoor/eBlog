@@ -21,13 +21,11 @@ class UserUpdateRequest extends FormRequest
     {
 
         return [
-            'name' => 'required',
-
-            'email' => 'required|email|unique:users,email,' . $this->user->id,
-
+            'name' => 'required|unique:users,name,' . $this->id,
+            'email' => 'required|email|unique:users,email,' . $this->id,
             'password' => 'same:confirm-password',
+            'role_id' => 'required|exists:roles,id',
 
-            'role_id' => 'required'
         ];
     }
 }

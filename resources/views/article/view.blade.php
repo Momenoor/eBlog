@@ -91,12 +91,14 @@
                             <!--end::Text-->
                         </div>
                         <!--end::Description-->
+                        @can(' article-edit')
                         <div class="d-flex justify-content-end">
                             @if ($isAuthor)
                             <a class="btn btn-sm btn-primary" href="{{ route('article.edit', $article->id) }}">Edit
                                 Article</a>
                             @endif
                         </div>
+                        @endcan
                         <!--begin::Block-->
                         <div class="d-flex align-items-center border-1 border-dashed card-rounded p-5 p-lg-10 mb-14">
                             <!--begin::Section-->
