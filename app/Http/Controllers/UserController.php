@@ -22,6 +22,7 @@ use Illuminate\Support\Arr;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 
@@ -55,12 +56,46 @@ class UserController extends Controller
 
     {
 
+        DB::beginTransaction();
+
+        try {
+            // create user
+            $user = User::create($request->all());
+            // upload image to storage and update user with image path
+            if ($request->hasFile('profile_photo_path')) {
+                $image = $request->file('profile_photo_path');
+                $imageName = $user->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
+                $size = $image->getSize();
+                $image->move(public_path('images/'), $imageName);
+
+                $user->update([
+                    'profile_photo_path' => 'images/' . $imageName,
+                ]);
+            }
+
+            $user->update([
+                'password' => Hash::make($request->input('password')),
+            ]);
+
+            $user->assignRole($request->input('role_id'));
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e);
+        } finally {
+            // redirect to index
+            return redirect()->route('users.index');
+        }
+
+        /*
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
         $user->assignRole($request->input('role_id'));
         return redirect()->route('users.index');
+    */
     }
 
 
@@ -92,7 +127,44 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
 
     {
+
+
         $input = $request->all();
+
+        // Check if a new password is provided
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            // If password is not provided, exclude it from the update
+            $input = Arr::except($input, ['password']);
+        }
+
+        // Handle profile photo update
+        if ($request->hasFile('profile_photo_path')) {
+            // Delete the previous profile photo
+            if (!empty($user->profile_photo_path)) {
+                $previousImagePath = public_path($user->profile_photo_path);
+                if (File::exists($previousImagePath)) {
+                    File::delete($previousImagePath);
+                }
+            }
+
+            $image = $request->file('profile_photo_path');
+            $imageName = $user->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
+            $size = $image->getSize();
+            $image->move(public_path('images/'), $imageName);
+
+            // Update user with new profile photo path
+            $input['profile_photo_path'] = 'images/' . $imageName;
+        }
+
+        // Update user with the provided data
+        $user->update($input);
+
+        // Sync roles
+        $user->syncRoles($request->input('roles'));
+
+        return redirect()->route('users.index'); /*$input = $request->all();
 
         if (!empty($input['password'])) {
 
@@ -105,7 +177,7 @@ class UserController extends Controller
         $user->update($input);
 
         $user->syncRoles($request->input('roles'));
-        return redirect()->route('users.index');
+        return redirect()->route('users.index');*/
     }
 
 

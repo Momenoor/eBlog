@@ -191,8 +191,13 @@
                                                     <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                                         <a href="">
                                                             <div class="symbol-label">
-                                                                <img src="/metronic8/demo28/assets/media/avatars/300-6.jpg"
-                                                                    alt="Emma Smith" class="w-100" />
+                                                                @if($user->profile_photo_path == null)
+                                                                <img src="{{asset('assets/media/avatars/blank.png')}}"
+                                                                    alt="{{$user->name}}">
+                                                                @else
+                                                                <img src="{{asset($user->profile_photo_path)}}"
+                                                                    alt="{{$user->name}}">
+                                                                @endif
                                                             </div>
                                                         </a>
                                                     </div>

@@ -29,6 +29,7 @@ class MediaStoreRequest extends FormRequest
             'path' => 'required',
             'size' => 'required',
             'article_id' => 'integer|exists:articles,id',
+
         ];
     }
 }

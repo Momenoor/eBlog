@@ -24,7 +24,9 @@ class UserStoreRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:password_confirmation',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'profile_photo_path' => 'sometimes|required',
+
 
         ];
     }

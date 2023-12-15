@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Articles;
+use App\Models\Article;
 
 class Media extends Model
 {
@@ -19,6 +19,6 @@ class Media extends Model
     ];
     public function article()
     {
-        return $this->belongsTo(Articles::class);
+        return $this->belongsTo(Article::class);
     }
 }

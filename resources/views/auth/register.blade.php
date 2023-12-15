@@ -1,6 +1,7 @@
 @extends('auth.layouts.app')
 @section('content')
-<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" method="POST" action="{{route('register')}}">
+<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" method="POST" enctype="multipart/form-data"
+    action="{{route('register')}}">
 
     @csrf
     <!--begin::Heading-->
@@ -142,19 +143,17 @@
     <!--end::Input group--->
 
 
-    {{-- <div class="fv-row mb-8"> --}}
-        {{--
-        <!--begin::Repeat Password--> --}}
-        {{-- <input type="file" name="profile_photo_path" autocomp --}} {{--
-            class="form-control bg-transparent  @error('profile_photo_path') is-invalid @enderror" --}} {{--
-            value="{{old('profile_photo_path')}}" accept="image" /> --}}
-        {{--
-        <!--end::Repeat Password--> --}}
-        {{-- @error('name') --}}
-        {{-- <span class="text-danger">{{$errors->first('profile_photo_path')}}</span> --}}
-        {{-- @enderror --}}
-        {{--
-    </div> --}}
+    <div class="fv-row mb-8">
+
+        <!--begin::Repeat Password-->
+        <input type="file" name="profile_photo_path" autocomp
+            class="form-control bg-transparent  @error('profile_photo_path') is-invalid @enderror"
+            value="{{old('profile_photo_path')}}" accept="image" />
+
+        @error('name')
+        <span class="text-danger">{{$errors->first('profile_photo_path')}}</span>
+        @enderror
+    </div>
 
     {{--
     <!--begin::Accept--> --}}

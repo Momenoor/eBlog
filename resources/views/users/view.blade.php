@@ -77,11 +77,11 @@
                                     <div class="d-flex flex-center flex-column py-5">
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-100px symbol-circle mb-7">
-                                            @if($user->profile_picture == null)
+                                            @if($user->profile_photo_path == null)
                                             <img src="{{asset('assets/media/avatars/blank.png')}}"
                                                 alt="{{$user->name}}">
                                             @else
-                                            <img src="{{asset($user->profile_picture)}}" alt="{{$user->name}}">
+                                            <img src="{{asset($user->profile_photo_path)}}" alt="{{$user->name}}">
                                             @endif
                                         </div>
                                         <!--end::Avatar-->

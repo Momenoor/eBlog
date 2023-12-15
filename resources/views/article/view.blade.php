@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <div id="kt_app_content" class="app-content  flex-column-fluid ">
-
-    <!--begin::Post card-->
     <!--begin::Post card-->
     <div class="card">
         <!--begin::Body-->
@@ -105,10 +103,12 @@
                             <div class="text-center flex-shrink-0 me-7 me-lg-13">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-70px symbol-circle mb-2">
-                                    @if($article->author->profile_picture == null)
-                                    <img src="{{asset('assets/media/avatars/blank.png')}}" class="" alt="" />
+                                    @if($article->author->profile_photo_path == null)
+                                    <img src="{{asset('assets/media/avatars/blank.png')}}"
+                                        alt="{{$article->author->name}}">
                                     @else
-                                    <img src="{{asset($article->author->profile_picture)}}" class="" alt="" />
+                                    <img src="{{asset($article->author->profile_photo_path)}}"
+                                        alt="{{$article->author->name}}">
                                     @endif
                                 </div>
                                 <!--end::Avatar-->
@@ -215,7 +215,6 @@
                     </div>
                     <form method="POST" class="mt-10 mb-5" action="{{route('article.create.comment',$article)}}">
                         @csrf
-
                         <!--begin::Editor-->
                         <div data-control="quill" class="min-h-200px mb-2 @error('body') is-invalid @enderror">
                             {!! old('body') !!}
@@ -236,10 +235,6 @@
                     <!--end::Post content-->
                 </div>
                 <!--end::Content-->
-
-
-
-
                 <!--begin::Sidebar-->
                 <div class="flex-column flex-lg-row-auto w-100 w-xl-300px mb-10">
                     <!--begin::Search blog-->

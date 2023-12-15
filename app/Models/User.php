@@ -49,6 +49,13 @@ class User extends Authenticatable
         'role_id' => 'array',
     ];
 
+
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
     //
     public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

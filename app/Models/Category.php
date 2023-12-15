@@ -30,4 +30,12 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+
+    public function show(Category $category)
+    {
+        $this->authorize('view', $category);
+
+        // Your logic for displaying the category
+    }
 }

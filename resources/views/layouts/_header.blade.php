@@ -926,7 +926,7 @@
                         class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
                         <!--begin:Menu link-->
                         <span class="menu-link py-3">
-                            <span class="menu-title">Dashboards</span>
+                            <span class="menu-title">Dashboard</span>
                             <span class="menu-arrow d-lg-none"></span>
                         </span>
                         <!--end:Menu link-->
@@ -957,7 +957,8 @@
                                                             </i>
                                                         </span>
                                                         <span class="d-flex flex-column">
-                                                            <span class="fs-6 fw-bold text-gray-800">Category</span>
+                                                            <a href="{{route('category.index')}}"
+                                                                class="fs-6 fw-bold text-gray-800">Category</a>
                                                             <span class="fs-7 fw-semibold text-muted">Create ,Edit &
                                                                 View </span>
                                                         </span>
@@ -983,7 +984,8 @@
                                                             </i>
                                                         </span>
                                                         <span class="d-flex flex-column">
-                                                            <span class="fs-6 fw-bold text-gray-800">Tag</span>
+                                                            <a href="{{route('tag.index')}}"
+                                                                class="fs-6 fw-bold text-gray-800">Tag</a>
                                                             <span class="fs-7 fw-semibold text-muted">Create & View
                                                             </span>
                                                         </span>
@@ -1143,7 +1145,6 @@
                                                 <!--end:Menu link-->
                                             </div>
                                             @endcan
-
                                             <!--end:Menu item-->
                                         </div>
                                         <!--end:Menu sub-->

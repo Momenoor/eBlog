@@ -34,7 +34,8 @@
                 <!--begin::Modal body-->
                 <div class="modal-body px-5 my-7">
                     <!--begin::Form-->
-                    <form id="kt_modal_add_user_form" class="form" method="POST" action="{{route('users.store')}}">
+                    <form id="kt_modal_add_user_form" enctype="multipart/form-data" class="form" method="POST"
+                        action="{{route('users.store')}}">
                         @csrf
                         <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
@@ -76,8 +77,8 @@
                                         <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span
                                                 class="path2"></span></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="profile_photo_path" accept=".png, .jpg, .jpeg" />
-                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="file" name="profile_photo_path" accept="image" />
+                                        <input type="hidden" name="profile_photo_path" accept="image" />
                                         <!--end::Inputs-->
                                     </label>
                                     <!--end::Label-->
@@ -175,7 +176,7 @@
 
                                 <!--begin::Select-->
                                 <select class="form-select form-select-solid" data-control="select2" name="role_id"
-                                    id="role_id">
+                                    id="role_id" multiple="multiple">
                                     @foreach ($roles as $key => $role)
                                     <option value="{{ $key }}" id="kt_modal_update_role_option_{{ $key }}">
                                         {{ $role }}

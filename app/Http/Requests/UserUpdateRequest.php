@@ -25,6 +25,7 @@ class UserUpdateRequest extends FormRequest
             'email' => 'required|email|unique:users,email,' . $this->id,
             'password' => 'same:confirm-password',
             'role_id' => 'required|exists:roles,id',
+            'profile_photo_path' => 'sometimes|required',
 
         ];
     }

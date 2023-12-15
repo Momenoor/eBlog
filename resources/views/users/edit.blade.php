@@ -78,8 +78,8 @@
                                         <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span
                                                 class="path2"></span></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="file" name="profile_photo_path" accept="image" />
+                                        <input type="hidden" name="profile_photo_path" accept="image" />
                                         <!--end::Inputs-->
                                     </label>
                                     <!--end::Label-->
@@ -152,7 +152,7 @@
                                 <!--end::Label-->
                                 <!--begin::Roles Select-->
                                 <select name="role_id" class="form-select form-select-solid" data-control="select2"
-                                    required>
+                                    required multiple="multiple">
                                     @foreach ($roles as $role)
                                     <option value="{{ $role }}" {{ old('role_id', $user->role_id) ==
                                         $role ? 'selected' : '' }}>

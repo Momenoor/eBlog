@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            //'profile_photo_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_photo_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             //'role_id' => ['integer'],
             //'bio' => 'string|max:160',
         ]);
@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            //'profile_photo_path' => $this->uploadImage($data['profile_photo_path']),
+            'profile_photo_path' => $this->uploadImage($data['profile_photo_path']),
             //'bio' => 'roles',
             'role_id' => null,
         ]);
