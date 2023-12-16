@@ -165,20 +165,9 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        /*  // Update article details */
-        /*  $article->update([ */
-        /*      'title' => $request->input('title'), */
-        /*      'body' => $request->input('body'), */
-        /*      'category_id' => $request->input('category_id'), */
-        /*      'published_at' => $request->input('published_at'), */
-        /*  ]); */
-        /*  // Update tags */
-        /*  $article->tags()->sync($request->input('tags', [])); */
-        /*  // Update image if provided */
-        /*  if ($request->hasFile('image')) { */
-        /*      // Handle image upload and update the article's image path */
-        /*      $imagePath = $this->uploadImage($request->file('image')); */
-        /*      $article->heroImage()->update(['path' => $imagePath]); */
-        /*  } */
+        if (!$article->article()->exists()) {
+            $article->delete();
+        }
+        return redirect()->route('article.index');
     }
 }

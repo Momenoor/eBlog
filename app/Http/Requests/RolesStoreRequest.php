@@ -24,6 +24,7 @@ class RolesStoreRequest extends FormRequest
         return [
             'name' => 'required|unique:roles,name',
             'permission.*' => 'exists:permissions,name',
+
         ];
     }
 }

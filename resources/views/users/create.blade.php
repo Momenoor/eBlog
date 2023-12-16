@@ -173,9 +173,8 @@
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-5">Role</label>
                                 <!--end::Label-->
-
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid" data-control="select2" name="role_id"
+                                <select class="form-select form-select-solid" data-control="select2" name="role_id[]"
                                     id="role_id" multiple="multiple">
                                     @foreach ($roles as $key => $role)
                                     <option value="{{ $key }}" id="kt_modal_update_role_option_{{ $key }}">

@@ -76,7 +76,9 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $comment->delete();
+        if (!$comment->article()->exists()) {
+            $comment->delete();
+        }
         return redirect()->route('comment.index');
     }
 }

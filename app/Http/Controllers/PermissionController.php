@@ -73,7 +73,9 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        $permission->delete();
+        if (!$permission->roles()->exists()) {
+            $permission->delete();
+        }
         return redirect()->route('permission.index');
     }
 }

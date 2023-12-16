@@ -142,11 +142,8 @@
                                             <td>
                                                 @if(!empty($user->getRoleNames()))
                                                 @foreach($user->getRoleNames() as $_user)
-
                                                 <label class="badge badge-success">{{ $_user }}</label>
-
                                                 @endforeach
-
                                                 @endif
                                             </td>
                                             <td>

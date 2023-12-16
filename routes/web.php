@@ -19,22 +19,21 @@ Route::get('/', [\App\Http\Controllers\ArticleController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\ArticleController::class, 'index'])->name('home');
+// Define a custom middleware for admin
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('article', App\Http\Controllers\ArticleController::class);
     Route::resource('comment', App\Http\Controllers\CommentController::class);
     Route::resource('permission', App\Http\Controllers\PermissionController::class);
-    Route::resource('role', App\Http\Controllers\RoleController::class);
     Route::resource('media', App\Http\Controllers\MediaController::class);
     Route::resource('user', App\Http\Controllers\UserController::class);
     Route::post('article/{article}/comment', [CommentController::class, 'store'])->name('article.create.comment');
     Route::resource('users', App\Http\Controllers\UserController::class);
-});
-
-Route::middleware(['admin'])->group(function () {
     Route::resource('category', App\Http\Controllers\CategoryController::class);
     Route::resource('tag', App\Http\Controllers\TagController::class);
+});
 
-    // Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-    // Add more admin routes here
+Route::group(['middleware' => ['role:admin']], function () {
+
+    Route::resource('role', App\Http\Controllers\RoleController::class);
 });

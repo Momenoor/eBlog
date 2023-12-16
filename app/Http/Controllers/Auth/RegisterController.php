@@ -55,36 +55,39 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'profile_photo_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            //'role_id' => ['integer'],
             //'bio' => 'string|max:160',
         ]);
     }
 
-    protected function create(array $data)
-    {
-        /*return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role_id' => $data['role_id'],
-            'profile_photo_path' => $data['profile_photo_path'],
-        ]);*/
 
+    public function create(array $data)
+    {
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'profile_photo_path' => $this->uploadImage($data['profile_photo_path']),
-            //'bio' => 'roles',
-            'role_id' => null,
         ]);
+
+        $profilePhotoPath = $this->uploadImage($data, $user);
+
+        if ($profilePhotoPath) {
+            $user->update(['profile_photo_path' => $profilePhotoPath]);
+        }
+
         return $user;
     }
 
-    protected function uploadImage($image)
+
+    protected function uploadImage($data, $user)
     {
-        $imageName = time() . '.' . $image->extension();
-        $image->move(public_path('images'), $imageName);
-        return $imageName;
+        if (isset($data['profile_photo_path']) && $data['profile_photo_path']->isValid()) {
+            $image = $data['profile_photo_path'];
+            $imageName = $user->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/'), $imageName);
+
+            return 'images/' . $imageName;
+        }
+
+        return null; // or any default value you prefer if no image is provided
     }
 }

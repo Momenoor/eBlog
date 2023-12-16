@@ -67,12 +67,12 @@ class TagController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Tag $tag)
     {
-        $tag->delete();
+        if (!$tag->articles()->exists()) {
+            $tag->delete();
+        }
         return redirect()->route('tag.index');
     }
 }

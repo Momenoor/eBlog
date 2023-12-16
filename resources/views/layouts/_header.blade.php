@@ -1187,11 +1187,11 @@
 
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a class="menu-link py-3" href="{{route('role.create')}}">
+                                                <a class="menu-link py-3" href="{{route('role.index')}}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Create Roles</span>
+                                                    <span class="menu-title">List Roles</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>

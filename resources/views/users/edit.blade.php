@@ -151,7 +151,7 @@
                                 <label class="required fw-semibold fs-6 mb-5">Role</label>
                                 <!--end::Label-->
                                 <!--begin::Roles Select-->
-                                <select name="role_id" class="form-select form-select-solid" data-control="select2"
+                                <select name="role_id[]" class="form-select form-select-solid" data-control="select2"
                                     required multiple="multiple">
                                     @foreach ($roles as $role)
                                     <option value="{{ $role }}" {{ old('role_id', $user->role_id) ==

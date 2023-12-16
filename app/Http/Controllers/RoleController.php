@@ -56,6 +56,7 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
+
         return view('role.index', compact('permissions'));
     }
 
@@ -114,9 +115,9 @@ class RoleController extends Controller
     public function destroy(Role $role)
 
     {
-        DB::table("roles")->where('id', $role->id)->delete();
-
-        return redirect()->route('role.index')
-            ->with('success', 'Role deleted successfully');
+        if (!$role->users()->exists()) {
+            $role->delete();
+        }
+        return redirect()->route('role.index');
     }
 }

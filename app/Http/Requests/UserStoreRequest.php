@@ -15,19 +15,14 @@ class UserStoreRequest extends FormRequest
     {
         return true;
     }
-
-
     public function rules(): array
     {
-
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:password_confirmation',
             'role_id' => 'required',
             'profile_photo_path' => 'sometimes|required',
-
-
         ];
     }
 }

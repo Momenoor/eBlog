@@ -63,8 +63,9 @@ class MediaController extends Controller
      */
     public function destroy(Media $media)
     {
-
-        $media->delete();
+        if (!$media->article()->exists()) {
+            $media->delete();
+        }
         return redirect()->route('media.index');
     }
 }
