@@ -23,6 +23,7 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 
 use Illuminate\Support\Facades\File;
+use Tonysm\TurboLaravel\Facades\Turbo;
 
 class UserController extends Controller
 
@@ -30,13 +31,11 @@ class UserController extends Controller
     public function index(Request $request)
 
     {
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::pluck('name', 'name');
 
         $users = User::latest()->paginate(5);
 
-        return view('users.index', compact('users', 'roles'))
-
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('users.index', compact('users', 'roles'));
     }
 
 
@@ -99,52 +98,51 @@ class UserController extends Controller
     }
 
 
-
     public function edit($id)
-
     {
         $user = User::find($id);
-
-        $roles = Role::pluck('name', 'name')->all();
-
-        $userRole = $user->roles->pluck('name', 'name')->all();
-        return view('users.index', compact('user', 'roles', 'userRole'));
+        $roles = Role::pluck('name', 'name');
+        $userRoles = $user->roles->pluck('name', 'name');
+        return view('users.index', compact('user', 'roles', 'userRoles'));
+        //return turbo_stream()->update('userForm', view('users._turbo', compact('user', 'roles', 'userRoles')));
     }
 
 
-    public function update(UserUpdateRequest $request, User $user)
-
+    public function update(UserUpdateRequest $request, User $users)
     {
         $input = $request->all();
 
-        if (!empty($input['password'])) {
-            $input['password'] = Hash::make($input['password']);
-        } else {
-            $input = Arr::except($input, ['password']);
-        }
-
         if ($request->hasFile('profile_photo_path')) {
-            if (!empty($user->profile_photo_path)) {
-                $previousImagePath = public_path($user->profile_photo_path);
+            if (!empty($users->profile_photo_path)) {
+                $previousImagePath = public_path($users->profile_photo_path);
                 if (File::exists($previousImagePath)) {
                     File::delete($previousImagePath);
                 }
             }
 
             $image = $request->file('profile_photo_path');
-            $imageName = $user->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
-            $size = $image->getSize();
+            $imageName = $users->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/'), $imageName);
 
             $input['profile_photo_path'] = 'images/' . $imageName;
         }
 
-        $user->update($input);
+        $users->update($input);
+        // Send Turbo Stream updates
 
         // Sync roles
-        $user->syncRoles($request->input('roles'));
+        $users->syncRoles($request->input('roles'));
 
-        return redirect()->route('users.index');
+        //return turbo_stream()->update('userForm', view('users.edit', compact('users')));
+
+        return turbo_stream()->target('userList')
+            ->action('update')->view('users.index', ['users' => $users]);
+
+        //return redirect()->route('users.index');
+
+        //return redirect()->back();
+
+
     }
 
 
