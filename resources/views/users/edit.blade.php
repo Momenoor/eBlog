@@ -20,30 +20,30 @@
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
                 @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{session('error')}}
-                    </div>
+                <div class="alert alert-danger">
+                    {{session('error')}}
+                </div>
                 @endif
                 <div>
                     @if($errors->any())
-                        <ul class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                                <li>
-                                    {{$error}}
-                                </li>
-                            @endforeach
-                        </ul>
+                    <ul class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        <li>
+                            {{$error}}
+                        </li>
+                        @endforeach
+                    </ul>
                     @endif
 
                     <form class="form" method="POST" action="{{route('users.update',$user)}}"
-                          enctype="multipart/form-data">
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_edit_user_scroll"
-                             data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
-                             data-kt-scroll-dependencies="#kt_modal_edit_user_header"
-                             data-kt-scroll-wrappers="#kt_modal_edit_user_scroll" data-kt-scroll-offset="300px">
+                            data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
+                            data-kt-scroll-dependencies="#kt_modal_edit_user_header"
+                            data-kt-scroll-wrappers="#kt_modal_edit_user_scroll" data-kt-scroll-offset="300px">
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -64,10 +64,10 @@
                                 <!--end::Image placeholder-->
                                 <!--begin::Image input-->
                                 <div class="image-input image-input-outline image-input-placeholder"
-                                     data-kt-image-input="true">
+                                    data-kt-image-input="true">
                                     <!--begin::Preview existing avatar-->
                                     <div class="image-input-wrapper w-125px h-125px"
-                                         style="background-image: url('{{asset($user->profile_photo_path)}}')">
+                                        style="background-image: url('{{asset($user->profile_photo_path)}}')">
                                     </div>
                                     <!--end::Preview existing avatar-->
 
@@ -125,8 +125,8 @@
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <input type="text" name="user_name" class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="Full name" value="{{$user->name}}" />
+                                <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0"
+                                    placeholder="Full name" value="{{$user->name}}" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -138,9 +138,8 @@
                                 <!--end::Label-->
 
                                 <!--begin::Input-->
-                                <input type="email" name="user_email"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="example@domain.com" value="{{$user->email}}" />
+                                <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0"
+                                    placeholder="" value="{{$user->email}}" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -153,12 +152,12 @@
                                 <!--end::Label-->
                                 <!--begin::Roles Select-->
                                 <select name="roles[]" class="form-select form-select-solid" data-control="select2"
-                                        required multiple="multiple">
+                                    required multiple="multiple">
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role }}" {{ old('roles', $user->roles()->pluck('name')) ==
+                                    <option value="{{ $role }}" {{ old('roles', $user->roles()->pluck('name')) ==
                                         $role ? 'selected' : '' }}>
-                                            {{ $role }}
-                                        </option>
+                                        {{ $role }}
+                                    </option>
                                     @endforeach
                                 </select>
 
@@ -173,17 +172,18 @@
                         <!--begin::Actions-->
                         <div class="text-center pt-15">
                             <button type="reset" class="btn btn-light me-3" data-ds-dismiss="modal"
-                                    data-kt-roles-modal-action="cancel" data-bs-dismiss="modal">
+                                data-kt-roles-modal-action="cancel" data-bs-dismiss="modal">
                                 Discard
                             </button>
 
                             <button type="submit" class="btn btn-primary" data-kt-roles-modal-action="submit">
-                            <span class="indicator-label">
-                                Submit
-                            </span>
+                                <span class="indicator-label">
+                                    Submit
+                                </span>
                                 <span class="indicator-progress">
-                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
+                                    Please wait... <span
+                                        class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
                             </button>
                         </div>
                         <!--end::Actions-->

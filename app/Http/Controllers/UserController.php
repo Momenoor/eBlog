@@ -108,44 +108,29 @@ class UserController extends Controller
     }
 
 
-    public function update(UserUpdateRequest $request, User $users)
+
+    public function update(Request $request, User $user)
     {
-        $input = $request->all();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'roles' => 'required|array',
+        ]);
+
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+
+        $user->syncRoles($request->input('roles'));
 
         if ($request->hasFile('profile_photo_path')) {
-            if (!empty($users->profile_photo_path)) {
-                $previousImagePath = public_path($users->profile_photo_path);
-                if (File::exists($previousImagePath)) {
-                    File::delete($previousImagePath);
-                }
-            }
-
-            $image = $request->file('profile_photo_path');
-            $imageName = $users->id . '-' . time() . '-app.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/'), $imageName);
-
-            $input['profile_photo_path'] = 'images/' . $imageName;
+            $profilePhotoPath = $request->file('profile_photo_path')->store('profile-photos', 'public');
+            $user->update(['profile_photo_path' => $profilePhotoPath]);
         }
 
-        $users->update($input);
-        // Send Turbo Stream updates
-
-        // Sync roles
-        $users->syncRoles($request->input('roles'));
-
-        //return turbo_stream()->update('userForm', view('users.edit', compact('users')));
-
-        return turbo_stream()->target('userList')
-            ->action('update')->view('users.index', ['users' => $users]);
-
-        //return redirect()->route('users.index');
-
-        //return redirect()->back();
-
-
+        return redirect()->route('users.index');
     }
-
-
 
     public function destroy(User $user)
     {
