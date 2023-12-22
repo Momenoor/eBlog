@@ -1,20 +1,39 @@
-<div class="navbar navbar-expand-lg navbar-light">
-    <div class="text-center d-lg-none w-100">
-        <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
-            <i class="icon-unfold mr-2"></i>
-            More Links
-        </button>
-    </div>
+<!-- Footer -->
+<div class="navbar navbar-sm navbar-footer border-top">
+    <div class="container-fluid">
+                        <span>&copy; 2022 <a
+                                href="https://themeforest.net/item/limitless-responsive-web-application-kit/13080328">Limitless Web App Kit</a></span>
 
-    <div class="navbar-collapse collapse" id="navbar-footer">
-					<span class="navbar-text">
-						&copy; {{ date('Y') }}. <a href="#">{{ config('app.name') }}</a> by <a href="#" >Rouaa Nouri</a>
-					</span>
-
-        <ul class="navbar-nav ml-lg-auto">
-            <li class="nav-item"><a href="{{ route('home') }}" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Privacy Policy</a></li>
-            <li class="nav-item"><a href="{{ route('home') }}" class="navbar-nav-link" target="_blank"><i class="icon-file-text2 mr-2"></i> Terms of Use </a></li>
-{{--            <li class="nav-item"><a href="#" class="navbar-nav-link font-weight-semibold"><span class="text-pink-400"><i class="icon-phone mr-2"></i> Contact Us</span></a></li>--}}
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="https://kopyov.ticksy.com/"
+                   class="navbar-nav-link navbar-nav-link-icon rounded" target="_blank">
+                    <div class="d-flex align-items-center mx-md-1">
+                        <i class="ph-lifebuoy"></i>
+                        <span class="d-none d-md-inline-block ms-2">Support</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item ms-md-1">
+                <a href="https://demo.interface.club/limitless/demo/Documentation/index.html"
+                   class="navbar-nav-link navbar-nav-link-icon rounded" target="_blank">
+                    <div class="d-flex align-items-center mx-md-1">
+                        <i class="ph-file-text"></i>
+                        <span class="d-none d-md-inline-block ms-2">Docs</span>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item ms-md-1">
+                <a href="https://themeforest.net/item/limitless-responsive-web-application-kit/13080328?ref=kopyov"
+                   class="navbar-nav-link navbar-nav-link-icon text-primary bg-primary bg-opacity-10 fw-semibold rounded"
+                   target="_blank">
+                    <div class="d-flex align-items-center mx-md-1">
+                        <i class="ph-shopping-cart"></i>
+                        <span class="d-none d-md-inline-block ms-2">Purchase</span>
+                    </div>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
+<!-- /footer -->

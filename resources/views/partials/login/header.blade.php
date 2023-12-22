@@ -1,40 +1,39 @@
-<!-- Main navbar -->
-<div class="navbar navbar-expand-md navbar-dark">
-    <div class="mt-2 mr-5">
-        <a href="{{ route('home') }}" class="d-inline-block">
-            <h4 class="text-bold text-white">{{ config('app.name') }}</h4>
-        </a>
-    </div>
+<div class="navbar navbar-dark navbar-static py-2">
+    <div class="container-fluid">
+        <div class="navbar-brand">
+            <a href="index.html" class="d-inline-flex align-items-center">
+                <img src="../../../assets/images/logo_icon.svg" alt="">
+                <img src="../../../assets/images/logo_text_light.svg" class="d-none d-sm-inline-block h-16px ms-3" alt="">
+            </a>
+        </div>
 
-    <div class="d-md-none">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
-            <i class="icon-tree5"></i>
-        </button>
-    </div>
-
-    <div class="collapse navbar-collapse" id="navbar-mobile">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a href="{{ route('home') }}" class="navbar-nav-link">
-                    <i class="icon-home"></i>
-                    <span class="d-md-none ml-2">Home</span>
-                </a>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a href="{{ route('login') }}" class="navbar-nav-link">
-                    <i class="icon-user-tie"></i>
-                    <span class="d-md-none ml-2">My Account</span>
-                </a>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a href="#" class="navbar-nav-link">
-                    <i class="icon-cog3"></i>
-                    <span class="d-md-none ml-2">Options</span>
-                </a>
-            </li>
-        </ul>
+        <div class="d-flex justify-content-end align-items-center ms-auto">
+            <ul class="navbar-nav flex-row">
+                <li class="nav-item">
+                    <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded ms-1">
+                        <div class="d-flex align-items-center mx-md-1">
+                            <i class="ph-lifebuoy"></i>
+                            <span class="d-none d-md-inline-block ms-2">Support</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded ms-1">
+                        <div class="d-flex align-items-center mx-md-1">
+                            <i class="ph-user-circle-plus"></i>
+                            <span class="d-none d-md-inline-block ms-2">Register</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded ms-1">
+                        <div class="d-flex align-items-center mx-md-1">
+                            <i class="ph-user-circle"></i>
+                            <span class="d-none d-md-inline-block ms-2">Login</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
-<!-- /main navbar -->

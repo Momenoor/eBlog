@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::get('/home', [\App\Http\Controllers\ArticleController::class, 'index'])->
 // Define a custom middleware for admin
 Route::resource('article', App\Http\Controllers\ArticleController::class)->only('index', 'show');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::middleware('auth')->group(function () {
     Route::resource('article', App\Http\Controllers\ArticleController::class)->only('create', 'store', 'edit', 'update', 'destroy');
     Route::resource('comment', App\Http\Controllers\CommentController::class);
     Route::resource('permission', App\Http\Controllers\PermissionController::class);
