@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleStoreRequest;
+use App\Http\Requests\ArticleUpdateRequest;
 use App\Jobs\UploadImageJob;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Media;
 use App\Models\Tag;
-use Illuminate\Http\Request;
-use App\Http\Requests\ArticleStoreRequest;
-use App\Http\Requests\ArticleUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->skip(4)->take(6)->get();
-        $firstArticle = Article::latest()->first();
-        $threeArticles = Article::latest()->skip(1)->take(3)->get();
-        return view('article.index', compact('articles', 'firstArticle', 'threeArticles'));
+        $query = Article::query()->latest()->take(4)->withCount('comments');
+        $articlesOne = $query->get();
+        $articlesTwo = $query->skip(4)->get();
+        $articlesThree = $query->skip(8)->get();
+        return view('article.index', compact('articlesOne', 'articlesTwo', 'articlesThree'));
     }
 
     /**

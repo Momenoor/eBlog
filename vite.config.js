@@ -11,4 +11,14 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        rollupOptions: {
+            // Expose jQuery as a global variable
+            output: {
+                globals: {
+                    jquery: 'jQuery'
+                }
+            }
+        }
+    }
 });

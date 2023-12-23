@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-xl-10">

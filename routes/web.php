@@ -20,9 +20,10 @@ Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\ArticleController::class, 'index'])->name('home');
 // Define a custom middleware for admin
+Route::resource('article', App\Http\Controllers\ArticleController::class)->only('index', 'show');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('article', App\Http\Controllers\ArticleController::class);
+    Route::resource('article', App\Http\Controllers\ArticleController::class)->only('create', 'store', 'edit', 'update', 'destroy');
     Route::resource('comment', App\Http\Controllers\CommentController::class);
     Route::resource('permission', App\Http\Controllers\PermissionController::class);
     Route::resource('media', App\Http\Controllers\MediaController::class);

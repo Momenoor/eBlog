@@ -1,52 +1,80 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-@include('layouts._head')
-<!--begin::Body-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body id="kt_app_body" data-kt-app-header-stacked="true" data-kt-app-header-primary-enabled="false"
-    data-kt-app-header-secondary-enabled="true" data-kt-app-header-tertiary-enabled="true" class="app-default">
-    <!--begin::Theme mode setup on page load-->
-    @include('layouts._theme_script')
-    <!--end::Theme mode setup on page load-->
-    <!--begin::Main-->
-    <!--begin::Root-->
-    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
-        <!--begin::Page-->
-        <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            <!--begin::Header-->
-            @include('layouts._header')
-            <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-                <!--begin::Wrapper container-->
-                <div class="app-container container-xxl d-flex flex-row flex-column-fluid">
-                    <!--begin::Main-->
-                    <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-                        <div class="d-flex flex-column flex-column-fluid">
-                            @include('layouts._content')
-                        </div>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-                        <!--end::Content-->
-                        <!--begin::Footer-->
-                        @include('layouts._footer')
-                        <!--end::Footer-->
-                    </div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                @if (Route::has('register'))
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @endif
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
                 </div>
-                <!--end::Wrapper-->
             </div>
-            <!--end::Page-->
-        </div>
+        </nav>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
-
-    <!--end::Root-->
-    <!--end::Main-->
-    @include('layouts._scroll_top')
-    @include('layouts._scripts')
-    @livewireScripts
-    <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.4/dist/livewire-turbolinks.js"
-        data-turbolinks-eval="false" data-turbo-eval="false"></script>
-
-
 </body>
-<!--end::Body-->
-
 </html>
