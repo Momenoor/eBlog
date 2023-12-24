@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class CommentFactory extends Factory
 {
     protected $model = Comment::class;
+
     /**
      * Define the model's default state.
      *
@@ -22,8 +23,17 @@ class CommentFactory extends Factory
     {
         return [
             'body' => $this->faker->paragraph(),
-            'author_id' => User::factory(),
-            'article_id' => Article::factory(),
+            'author_id' => User::inRandomOrder()->first(),
+            'article_id' => Article::inRandomOrder()->first(),
         ];
+    }
+
+    public function setArticle($comment): CommentFactory
+    {
+        return $this->state(function (array $attributes) use ($comment) {
+            return [
+                'article_id' => $comment->article_id,
+            ];
+        });
     }
 }

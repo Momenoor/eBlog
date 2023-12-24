@@ -56,9 +56,13 @@ class Article extends Model
     //
     public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
     }
 
+    public function allComments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
     //
 
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -78,8 +82,9 @@ class Article extends Model
         return $this->belongsTo(Media::class, 'hero_image_id');
     }
 
-    public function excerpt()
+    public function excerpt(): string
     {
-        return Str::limit($this->body, 250);
+        return Str::limit($this->body, 350);
     }
+
 }

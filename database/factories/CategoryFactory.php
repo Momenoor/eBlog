@@ -22,7 +22,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'slug' => $this->faker->slug(),
-            'created_by' => User::factory(),
+            'created_by' => User::inRandomOrder()->first(),
         ];
     }
 }

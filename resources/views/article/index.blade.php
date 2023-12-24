@@ -2,29 +2,19 @@
 @section('content')
     <!--begin::Wrapper-->
     <div class="row">
-        @if(collect($articlesOne,$articlesTwo,$articlesThree)->count() > 12)
-            <div class="col-lg-4">
-                @foreach($articlesOne as $article)
-                    @include('article.article_card_main_view',$article)
-                @endforeach
-            </div>
-            <div class="col-lg-4">
-                @foreach($articlesTwo as $article)
-                    @include('article.article_card_main_view',$article)
-                @endforeach
-            </div>
-            <div class="col-lg-4">
-                @foreach($articlesThree as $article)
-                    @include('article.article_card_main_view',$article)
-                @endforeach
-            </div>
-        @else
-            @foreach(collect($articlesOne,$articlesTwo,$articlesThree) as $article)
-                <div class="col-lg-4">
-                    @include('article.article_card_main_view',$article)
-                </div>
-            @endforeach
-        @endif
+        @foreach($articles as $i => $article)
+            @if($i % 4 == 0)
+                @if ($i != 0)
     </div>
+    @endif
 
+    <div class="col-lg-4">
+        @endif
+        @include('article.article_card_main_view',$article)
+
+        @endforeach
+        @if($i % 4 != 0)
+    </div>
+    @endif
+    </div>
 @endsection

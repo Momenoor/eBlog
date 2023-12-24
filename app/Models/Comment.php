@@ -4,25 +4,46 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Article;
 
 class Comment extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'author_id',
         'article_id',
         'body'
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    protected $with = [
+        'author',
+        'replies',
+    ];
+
     //
 
-    public function article()
+    public function article(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Article::class, 'aricle_id');
+        return $this->belongsTo(Article::class, 'article_id');
     }
 
-    public function author()
+    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function replies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
+
+    public function isAuthorized(): bool
+    {
+        return auth()->check() && $this->author_id === auth()->id(); // true or false
     }
 }

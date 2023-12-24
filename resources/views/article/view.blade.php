@@ -1,348 +1,613 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
-<div id="kt_app_content" class="app-content  flex-column-fluid ">
-    <!--begin::Post card-->
-    <div class="card">
-        <!--begin::Body-->
-        <div class="card-body p-lg-20 pb-lg-0">
-            <!--begin::Layout-->
-            <div class="d-flex flex-column flex-xl-row">
-                <!--begin::Content-->
-                <div class="flex-lg-row-fluid me-xl-15">
-                    <!--begin::Post content-->
-                    <div class="mb-17">
-                        <!--begin::Wrapper-->
-                        <div class="mb-8">
-                            <!--begin::Info-->
-                            <div class="d-flex flex-wrap mb-6">
-                                <!--begin::Item-->
-                                <div class="me-9 my-1">
-                                    <!--begin::Icon-->
-                                    <i class="ki-duotone ki-element-11 text-primary fs-2 me-1"><span
-                                            class="path1"></span><span class="path2"></span><span
-                                            class="path3"></span><span class="path4"></span></i>
-                                    <!--end::Icon-->
+    <div class="content-wrapper">
+        <!-- Inner content -->
+        <div class="content-inner">
+            <!-- Content area -->
+            <div class="content">
 
-                                    <!--begin::Label-->
-                                    <span class="fw-bold text-gray-500">{{$article->created_at->diffForHumans()}}</span>
-                                    <!--end::Label-->
+                <!-- Inner container -->
+                <div class="d-flex align-items-stretch align-items-lg-start flex-column flex-lg-row">
+
+                    <!-- Left content -->
+                    <div class="flex-1 order-2 order-lg-1">
+
+                        <!-- Post -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="mb-3 text-center">
+                                        <a href="#" class="d-inline-block">
+                                            <img src="{{$article->heroImage->path}}" class="img-fluid rounded"
+                                                 alt="{{$article->title}}">
+                                        </a>
+                                    </div>
+
+                                    <h3 class="card-title pt-2 mb-1">
+                                        <a href="#" class="text-body">{{$article->title}}</a>
+                                    </h3>
+
+                                    <ul class="list-inline list-inline-bullet text-muted mb-3">
+                                        <li class="list-inline-item">By <a href="#">{{$article->author->name}}</a></li>
+                                        <li class="list-inline-item">{{$article->created_at->format('F j, Y')}}</li>
+                                        <li class="list-inline-item"><a href="#">{{$article->all_comments_count}}
+                                                comments</a></li>
+                                        {{--                                        <li class="list-inline-item"><a href="#"><i class="ph-heart text-pink me-1"></i>--}}
+                                        {{--                                                281</a></li>--}}
+                                    </ul>
+                                    <div class="mb-3">
+                                        {!! $article->body !!}
+                                    </div>
                                 </div>
-                                <!--end::Item-->
 
-                                <!--begin::Item-->
-                                <div class="me-9 my-1">
-                                    <!--begin::Icon-->
-                                    <i class="ki-duotone ki-briefcase text-primary fs-2 me-1"><span
-                                            class="path1"></span><span class="path2"></span></i>
-                                    <!--end::Icon-->
-
-                                    <!--begin::Label-->
-                                    <span class="fw-bold text-gray-500">{{$article->category->name}}</span>
-                                    <!--begin::Label-->
-                                </div>
-                                <!--end::Item-->
-
-                                <!--begin::Item-->
-                                <div class="my-1">
-                                    <!--begin::Icon-->
-                                    <i class="ki-duotone ki-message-text-2 text-primary fs-2 me-1"><span
-                                            class="path1"></span><span class="path2"></span><span
-                                            class="path3"></span></i>
-                                    <!--end::Icon-->
-
-                                    <!--begin::Label-->
-                                    <span class="fw-bold text-gray-500">{{$article->comments_count}} Comments</span>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Item-->
                             </div>
-                            <!--end::Info-->
+                        </div>
+                        <!-- /post -->
 
-                            <!--begin::Title-->
-                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold">
-                                {{$article->title}}
 
-                                <span class="fw-bold text-muted fs-5 ps-1">5 mins read</span>
-                            </a>
-                            <!--end::Title-->
+                        <!-- About author -->
+                        <div class="card">
+                            <div class="card-header d-sm-flex border-bottom-0 pb-0">
+                                <h5 class="mb-0">About the author</h5>
 
-                            <!--begin::Container-->
-                            @if ($article->heroImage()->exists())
-                            <div class="mt-8">
-                                <!--begin::Image-->
-                                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-350px"
-                                    style="background-image:url('{{asset($article->heroImage->path)}}')">
+                                <div class="d-inline-flex align-items-center ms-sm-auto">
+                                    <a href="#" class="text-body ms-2" data-bs-popup="tooltip" title="Google Drive"><i
+                                            class="ph-google-logo"></i></a>
+                                    <a href="#" class="text-body ms-2" data-bs-popup="tooltip" title="Twitter"><i
+                                            class="ph-twitter-logo"></i></a>
+                                    <a href="#" class="text-body ms-2" data-bs-popup="tooltip" title="Github"><i
+                                            class="ph-github-logo"></i></a>
+                                    <a href="#" class="text-body ms-2" data-bs-popup="tooltip" title="Linked In"><i
+                                            class="ph-linkedin-logo"></i></a>
                                 </div>
-                                <!--end::Image-->
                             </div>
-                            @endif
-                            <!--end::Container-->
-                        </div>
-                        <!--end::Wrapper-->
 
-                        <!--begin::Description-->
-                        <div class="fs-5 fw-semibold text-gray-600">
-                            <!--begin::Text-->
-                            <p class="mb-8">
-                                {!! $article->body !!}
-                            </p>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Description-->
-                        @can(' article-edit')
-                        <div class="d-flex justify-content-end">
-                            @if ($isAuthor)
-                            <a class="btn btn-sm btn-primary" href="{{ route('article.edit', $article->id) }}">Edit
-                                Article</a>
-                            @endif
-                        </div>
-                        @endcan
-                        <!--begin::Block-->
-                        <div class="d-flex align-items-center border-1 border-dashed card-rounded p-5 p-lg-10 mb-14">
-                            <!--begin::Section-->
-                            <div class="text-center flex-shrink-0 me-7 me-lg-13">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-70px symbol-circle mb-2">
-                                    @if($article->author->profile_photo_path == null)
-                                    <img src="{{asset('assets/media/avatars/blank.png')}}"
-                                        alt="{{$article->author->name}}">
-                                    @else
-                                    <img src="{{asset($article->author->profile_photo_path)}}"
-                                        alt="{{$article->author->name}}">
-                                    @endif
+                            <div class="card-body d-flex flex-column flex-lg-row">
+                                <div class="me-lg-3 mb-2 mb-lg-0">
+                                    <a href="#">
+                                        <img src="{{asset('/images/demo/users/face1.jpg')}}" class="rounded-circle"
+                                             width="40" height="40" alt="">
+                                    </a>
                                 </div>
-                                <!--end::Avatar-->
 
-                                <!--begin::Info-->
-                                <div class="mb-0">
-                                    <a href="{{route('user.show', $article->author)}}"
-                                        class="text-gray-700 fw-bold text-hover-primary">{{$article->author->name}}</a>
-                                    <span
-                                        class="text-gray-500 fs-7 fw-semibold d-block mt-1">{{optional($article->author->role)->name}}</span>
+                                <div class="flex-fill">
+                                    <h6 class="mb-1">{{$article->author->name}}r</h6>
+                                    <p>{{$article->author->bio}}</p>
+
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item"><a href="{{route('user.show',$article->author)}}">Author
+                                                profile</a></li>
+                                        <li class="list-inline-item"><a href="#">All posts
+                                                by {{$article->author->name}}</a></li>
+                                    </ul>
                                 </div>
-                                <!--end::Info-->
                             </div>
-                            <!--end::Section-->
+                        </div>
+                        <!-- /about author -->
 
-                            <!--begin::Text-->
-                            <div class="mb-0 fs-6">
-                                <div class="text-muted fw-semibold lh-lg mb-2">
-                                    {{$article->author->bio}}
-                                </div>
 
-                                <a href="{{route('user.show', $article->author)}}"
-                                    class="fw-semibold link-primary">Author’s Profile</a>
+                        <!-- Comments -->
+                        <div class="card">
+                            <div class="card-header d-sm-flex">
+                                <h6 class="mb-0">Discussion</h6>
+                                <ul class="list-inline text-muted mb-0 ms-sm-auto">
+                                    <li class="list-inline-item">{{$article->all_comments_count}} comments</li>
+                                    {{--                                    <li class="list-inline-item">75 pending review</li>--}}
+                                </ul>
                             </div>
-                            <!--end::Text-->
+
+                            <div class="card-body">
+                                @if($article->comments_count>0)
+                                    @foreach($article->comments as $comment)
+                                        @include('comment.article_parent_comment',$comment)
+                                    @endforeach
+                                @endif
+                            </div>
+
+                            <div class="border-top border-bottom">
+                                <div id="add-comment">
+                                </div>
+                            </div>
+
+                            <div class="card-body text-end">
+                                <button type="button" class="btn btn-primary">
+                                    Submit
+                                    <i class="ph-paper-plane-tilt ms-2"></i>
+                                </button>
+                            </div>
                         </div>
-                        <!--end::Block-->
-                        @foreach ($article->tags as $tag)
-                        <a href="{{route('tag.show', $tag)}}"
-                            class="badge badge-primary me-2 mb-2 fw-bold  px-4 py-3">{{$tag->name}}</a>
-                        @endforeach
-                        <!--begin::Icons-->
-                        <div class="d-flex flex-center">
-                            <!--begin::Icon-->
-                            <a href="#" class="mx-4">
-                                <img src="{{asset('assets/media/svg/brand-logos/facebook-4.svg')}}" class="h-20px my-2"
-                                    alt="" />
-                            </a>
-                            <!--end::Icon-->
+                        <!-- /comments -->
 
-                            <!--begin::Icon-->
-                            <a href="#" class="mx-4">
-                                <img src="{{asset('assets/media/svg/brand-logos/instagram-2-1.svg')}}"
-                                    class="h-20px my-2" alt="" />
-                            </a>
-                            <!--end::Icon-->
-
-                            <!--begin::Icon-->
-                            <a href="#" class="mx-4">
-                                <img src="{{asset('assets/media/svg/brand-logos/github.svg')}}" class="h-20px my-2"
-                                    alt="" />
-                            </a>
-                            <!--end::Icon-->
-
-                            <!--begin::Icon-->
-                            <a href="#" class="mx-4">
-                                <img src="{{asset('assets/media/svg/brand-logos/behance.svg')}}" class="h-20px my-2"
-                                    alt="" />
-                            </a>
-                            <!--end::Icon-->
-
-                            <!--begin::Icon-->
-                            <a href="#" class="mx-4">
-                                <img src="{{asset('assets/media/svg/brand-logos/pinterest-p.svg')}}" class="h-20px my-2"
-                                    alt="" />
-                            </a>
-                            <!--end::Icon-->
-
-                            <!--begin::Icon-->
-                            <a href="#" class="mx-4">
-                                <img src="{{asset('assets/media/svg/brand-logos/twitter.svg')}}" class="h-20px my-2"
-                                    alt="" />
-                            </a>
-                            <!--end::Icon-->
-
-                            <!--begin::Icon-->
-                            <a href="#" class="mx-4">
-                                <img src="{{asset('assets/media/svg/brand-logos/dribbble-icon-1.svg')}}"
-                                    class="h-20px my-2" alt="" />
-                            </a>
-                            <!--end::Icon-->
-                        </div>
-                        <!--end::Icons-->
                     </div>
-                    <div class="separator separator-dashed my-10"></div>
-                    <!--end::Post content-->
-                    <h5>Comments</h5>
-                    @include('comment.list')
-                    @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{session('error')}}
-                    </div>
-                    @endif
-                    <div>
-                        @if($errors->any())
-                        <ul class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                            <li>
-                                {{$error}}
-                            </li>
-                            @endforeach
-                        </ul>
-                        @endif
-                    </div>
-                    <form method="POST" class="mt-10 mb-5" action="{{route('article.create.comment',$article)}}">
-                        @csrf
-                        <!--begin::Editor-->
-                        <div data-control="quill" class="min-h-200px mb-2 @error('body') is-invalid @enderror">
-                            {!! old('body') !!}
-                        </div>
-                        <input id="body" type="hidden" class="" name="body" value="{!! old('body') !!}" />
-                        <!--end::Editor-->
-                        @error('body')
-                        <span class="text-danger">{{$errors->first('body')}}</span>
-                        @enderror
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                <span class="">Save Comment </span>
-                            </button>
-                        </div>
+                    <!-- /left content -->
 
-                    </form>
-                    <!--begin::Post content-->
-                    <!--end::Post content-->
+
+                    <!-- Right sidebar component -->
+                    <div
+                        class="sidebar sidebar-component sidebar-expand-lg bg-transparent shadow-none order-1 order-lg-2 ms-lg-3 mb-3">
+
+                        <!-- Sidebar content -->
+                        <div class="sidebar-content">
+
+                            <!-- Search -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Search articles</span>
+                                </div>
+
+                                <div class="sidebar-section-body">
+                                    <div class="form-control-feedback form-control-feedback-end">
+                                        <input type="search" class="form-control" placeholder="Search...">
+                                        <div class="form-control-feedback-icon">
+                                            <i class="ph-magnifying-glass"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /search -->
+
+
+                            <!-- Categories -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Categories</span>
+                                </div>
+
+                                <div class="nav nav-sidebar">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="ph-file-text me-2"></i>
+                                            Posts
+                                            <span class="text-muted fs-sm fw-normal ms-auto">12</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="ph-file-video me-2"></i>
+                                            Video
+                                            <span class="text-muted fs-sm fw-normal ms-auto">26</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="ph-file-image me-2"></i>
+                                            Images
+                                            <span class="text-muted fs-sm fw-normal ms-auto">83</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="ph-files me-2"></i>
+                                            Articles
+                                            <span class="text-muted fs-sm fw-normal ms-auto">43</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="ph-camera me-2"></i>
+                                            Photography
+                                            <span class="text-muted fs-sm fw-normal ms-auto">72</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="ph-books me-2"></i>
+                                            Books
+                                            <span class="text-muted fs-sm fw-normal ms-auto">97</span>
+                                        </a>
+                                    </li>
+                                </div>
+                            </div>
+                            <!-- /categories -->
+
+
+                            <!-- Share -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Share</span>
+                                </div>
+
+                                <div class="sidebar-section-body pb-0">
+                                    <ul class="list-inline text-center mb-0">
+                                        <li class="list-inline-item">
+                                            <a href="#" class="btn btn-primary btn-icon btn-lg rounded-pill mb-3">
+                                                <i class="ph-facebook-logo"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#" class="btn btn-danger btn-icon btn-lg rounded-pill mb-3">
+                                                <i class="ph-youtube-logo"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#" class="btn btn-info btn-icon btn-lg rounded-pill mb-3">
+                                                <i class="ph-twitter-logo"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#" class="btn btn-warning btn-icon btn-lg rounded-pill mb-3">
+                                                <i class="ph-rss"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /share -->
+
+
+                            <!-- Recent comments -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Recent comments</span>
+                                </div>
+
+                                <div class="sidebar-section-body">
+                                    <li class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face10.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">James Alexander</a>
+                                            <div class="text-muted">Who knows, maybe that...</div>
+                                        </div>
+                                    </li>
+
+                                    <li class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face3.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Margo Baker</a>
+                                            <div class="text-muted">That was something he...</div>
+                                        </div>
+                                    </li>
+
+                                    <li class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face24.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Jeremy Victorino</a>
+                                            <div class="text-muted">But that would be...</div>
+                                        </div>
+                                    </li>
+
+                                    <li class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face4.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Beatrix Diaz</a>
+                                            <div class="text-muted">What a strenuous career...</div>
+                                        </div>
+                                    </li>
+
+                                    <li class="d-flex">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face25.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Richard Vango</a>
+                                            <div class="text-muted">Other travelling salesmen...</div>
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+                            <!-- /recent comments -->
+
+
+                            <!-- Photos from Flickr -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Photos from Flickr</span>
+                                </div>
+
+                                <div class="sidebar-section-body">
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <div class="card-img-actions">
+                                                <a href="../../../assets/images/demo/flat/8.png" class="text-white"
+                                                   data-bs-popup="lightbox">
+                                                    <img class="img-fluid rounded-top-start"
+                                                         src="../../../assets/images/demo/flat/8.png" alt="">
+                                                    <span class="card-img-actions-overlay rounded-top-start">
+															<i class="ph-plus"></i>
+														</span>
+                                                </a>
+                                            </div>
+
+                                            <div class="card-img-actions">
+                                                <a href="../../../assets/images/demo/flat/4.png" class="text-white"
+                                                   data-bs-popup="lightbox">
+                                                    <img class="img-fluid" src="../../../assets/images/demo/flat/4.png"
+                                                         alt="">
+                                                    <span class="card-img-actions-overlay">
+															<i class="ph-plus"></i>
+														</span>
+                                                </a>
+                                            </div>
+
+                                            <div class="card-img-actions">
+                                                <a href="../../../assets/images/demo/flat/5.png" class="text-white"
+                                                   data-bs-popup="lightbox">
+                                                    <img class="img-fluid rounded-bottom-start"
+                                                         src="../../../assets/images/demo/flat/5.png" alt="">
+                                                    <span class="card-img-actions-overlay rounded-bottom-start">
+															<i class="ph-plus"></i>
+														</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card-img-actions">
+                                                <a href="../../../assets/images/demo/flat/6.png" class="text-white"
+                                                   data-bs-popup="lightbox">
+                                                    <img class="img-fluid rounded-top-end"
+                                                         src="../../../assets/images/demo/flat/6.png" alt="">
+                                                    <span class="card-img-actions-overlay rounded-top-end">
+															<i class="ph-plus"></i>
+														</span>
+                                                </a>
+                                            </div>
+
+                                            <div class="card-img-actions">
+                                                <a href="../../../assets/images/demo/flat/7.png" class="text-white"
+                                                   data-bs-popup="lightbox">
+                                                    <img class="img-fluid" src="../../../assets/images/demo/flat/7.png"
+                                                         alt="">
+                                                    <span class="card-img-actions-overlay">
+															<i class="ph-plus"></i>
+														</span>
+                                                </a>
+                                            </div>
+
+                                            <div class="card-img-actions">
+                                                <a href="../../../assets/images/demo/flat/8.png" class="text-white"
+                                                   data-bs-popup="lightbox">
+                                                    <img class="img-fluid rounded-bottom-end"
+                                                         src="../../../assets/images/demo/flat/8.png" alt="">
+                                                    <span class="card-img-actions-overlay rounded-bottom-end">
+															<i class="ph-plus"></i>
+														</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /photos from Flickr -->
+
+
+                            <!-- Online users -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Online users</span>
+                                </div>
+
+                                <div class="sidebar-section-body">
+                                    <div class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face1.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">James Alexander</a>
+                                            <div class="fs-sm text-muted">Santa Ana, CA.</div>
+                                        </div>
+
+                                        <div class="align-self-center">
+                                            <div class="bg-success border-success rounded-pill p-1"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face2.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Jeremy Victorino</a>
+                                            <div class="fs-sm text-muted">Dowagiac, MI.</div>
+                                        </div>
+
+                                        <div class="align-self-center">
+                                            <div class="bg-danger border-danger rounded-pill p-1"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face3.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Margo Baker</a>
+                                            <div class="fs-sm text-muted">Kasaan, AK.</div>
+                                        </div>
+
+                                        <div class="align-self-center">
+                                            <div class="bg-success border-success rounded-pill p-1"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex mb-3">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face4.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Beatrix Diaz</a>
+                                            <div class="fs-sm text-muted">Neenah, WI.</div>
+                                        </div>
+
+                                        <div class="align-self-center">
+                                            <div class="bg-warning border-warning rounded-pill p-1"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <img src="../../../assets/images/demo/users/face5.jpg"
+                                                 class="rounded-circle" width="40" height="40" alt="">
+                                        </div>
+
+                                        <div class="flex-fill">
+                                            <a href="#" class="fw-semibold">Richard Vango</a>
+                                            <div class="fs-sm text-muted">Grapevine, TX.</div>
+                                        </div>
+
+                                        <div class="align-self-center">
+                                            <div class="bg-secondary border-secondary rounded-pill p-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /online users -->
+
+
+                            <!-- Tags -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Tags</span>
+                                </div>
+
+                                <div class="sidebar-section-body pb-2">
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-primary rounded-start-0 mb-2">Audio</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-warning rounded-start-0 mb-2">Gallery</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-indigo rounded-start-0 mb-2">Image</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-teal rounded-start-0 mb-2">Music</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-pink rounded-start-0 mb-2">Blog</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-purple rounded-start-0 mb-2">Learn</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-primary rounded-start-0 mb-2">Youtube</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-secondary rounded-start-0 mb-2">Twitter</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-warning rounded-start-0 mb-2">Eugene</span>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                <span
+                                                    class="badge bg-light border-start border-width-3 text-body border-indigo rounded-start-0 mb-2">Limitless</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /tags -->
+
+
+                            <!-- Archive -->
+                            <div class="card">
+                                <div class="sidebar-section-header border-bottom">
+                                    <span class="fw-semibold">Archive</span>
+                                </div>
+
+                                <div class="nav nav-sidebar">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">January 2018</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">December 2017</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">November 2017</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">October 2017</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">September 2017</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">August 2017</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">July 2017</a>
+                                    </li>
+                                </div>
+                            </div>
+                            <!-- /archive -->
+
+                        </div>
+                        <!-- /sidebar content -->
+
+                    </div>
+                    <!-- /right sidebar component -->
+
                 </div>
-                <!--end::Content-->
-                <!--begin::Sidebar-->
-                <div class="flex-column flex-lg-row-auto w-100 w-xl-300px mb-10">
-                    <!--begin::Search blog-->
-                    <div class="mb-16">
-                        <h4 class="text-gray-900 mb-7">Search Blog</h4>
-
-                        <!--begin::Input group-->
-                        <div class="position-relative">
-                            <i
-                                class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6"><span
-                                    class="path1"></span><span class="path2"></span></i>
-                            <input type="text" class="form-control form-control-solid ps-10" name="search" value=""
-                                placeholder="Search" />
-                        </div>
-                        <!--end::Input group-->
-                    </div>
-                    <!--end::Search blog-->
-
-
-                    <!--begin::Catigories-->
-                    <div class="mb-16">
-                        <h4 class="text-gray-900 mb-7">Categories</h4>
-                        @foreach($categories as $category)
-                        <!--begin::Item-->
-                        <div class="d-flex flex-stack fw-semibold fs-5 text-muted mb-4">
-                            <!--begin::Text-->
-                            <a href="{{route('category.show',$category)}}" class="text-muted text-hover-primary pe-2">
-                                {{$category->name}} </a>
-                            <!--end::Text-->
-
-                            <!--begin::Number-->
-                            <div class="m-0">
-                                {{$category->articles_count}}
-                            </div>
-                            <!--end::Number-->
-                        </div>
-                        <!--end::Item-->
-                        @endforeach
-                    </div>
-                    <!--end::Catigories-->
-
-
-                    <!--begin::Recent posts-->
-                    <div class="m-0">
-                        <h4 class="text-gray-900 mb-7">Recent Posts</h4>
-                        @foreach($recentArticles as $article)
-                        <!--begin::Item-->
-                        <div class="d-flex mb-7">
-                            <!--begin::Symbol-->
-
-                            <div class="symbol symbol-60px symbol-2by3 me-4">
-                                <div class="symbol-label"
-                                    style="background-image: url('{{asset($article->heroImage->path??null)}}')"></div>
-                            </div>
-                            <!--end::Symbol-->
-
-                            <!--begin::Title-->
-                            <div class="m-0">
-                                <a href="{{route('article.show',$article)}}"
-                                    class="text-gray-900 fw-bold text-hover-primary fs-6">{{$article->title}}</a>
-
-                                <span class="text-gray-600 fw-semibold d-block pt-1 fs-7">{!! $article->excerpt()
-                                    !!}</span>
-                            </div>
-                            <!--end::Title-->
-                        </div>
-                        @endforeach
-                        <!--end::Item-->
-                    </div>
-                    <!--end::Recent posts-->
-                </div>
-                <!--end::Sidebar-->
+                <!-- /inner container -->
             </div>
-            <!--end::Layout-->
         </div>
     </div>
-
-
-    @endsection
-    @push('scripts')
+@endsection
+@push('scripts')
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script>
         $(document).ready(function () {
-                    // Date picker
-                    //Text Editor
-                    var quill = new Quill('[data-control="quill"]', {
-                        modules: {
-                            toolbar: [
-                                [{
-                                    header: [1, 2, 3, false]
-                                }],
-                                ['bold', 'italic', 'underline'],
-                                [{'list': 'ordered'}, {'list': 'bullet'}],
-                                [{'direction': 'rtl'}],
-                                [{'color': []}, {'background': []}],          // dropdown with defau
-                                [{'font': []}],
-                                ['image', 'code-block'],
-                            ]
-                        },
-                        placeholder: 'Type your text here...',
-                        theme: 'snow' // or 'bubble'
-                    });
-                    quill.on('text-change', function (delta, oldDelta, source) {
-                        $('#body').val(quill.root.innerHTML);
-                    });
-                    document.addEventListener('turbo:submit-end', function () {
-                        quill.root.innerHTML = '';
-                        $('#body').val('');
-                    });
-                });
+            const quillBasic = new Quill('#add-comment', {
+                bounds: '.content-inner',
+                placeholder: 'Please add your text here...',
+                theme: 'snow'
+            });
+
+        });
     </script>
-    @endpush
+@endpush

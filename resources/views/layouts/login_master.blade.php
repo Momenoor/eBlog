@@ -9,47 +9,44 @@
 
     <title> @yield('page_title') | {{ config('app.name') }} </title>
 
-    @include('partials.inc_top')
+    @include('partials.login.inc_top')
 </head>
-
 <body>
-
-
 <!-- Page header -->
 @include('partials.login.header')
 <!-- /page header -->
-
-
 <!-- Page content -->
 <div class="page-content">
-
-
     <!-- Main content -->
     <div class="content-wrapper">
+        <div class="content-inner">
+            <!-- Content area -->
+            @if($errors->any())
+                <div class="content">
+                    <div class="alert alert-danger fade show">
+                        @foreach($errors->all() as $er)
+                            <span><i class="me-2">-</i> {{ $er }}</span> <br>
+                        @endforeach
 
-        <!-- Content area -->
+                    </div>
+                </div>
+            @endif
+            <div class="content d-flex justify-content-center align-items-center">
 
-
-        @if($errors->any())
-            <div class="alert alert-danger border-0 alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-
-                @foreach($errors->all() as $er)
-                    <span><i class="icon-arrow-right5"></i> {{ $er }}</span> <br>
-                @endforeach
+                <!-- Content area -->
+                @yield('content')
 
             </div>
-        @endif
-        <div id="ajax-alert" style="display: none"></div>
-
-        @yield('content')
+            <!-- /content area -->
 
 
+            @include('partials.login.footer')
+            <!-- /inner content -->
+        </div>
         <!-- /content area -->
-
     </div>
-    <!-- /main content -->
 
+    <!-- /main content -->
 </div>
 <!-- /page content -->
 @yield('scripts')

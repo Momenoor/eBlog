@@ -25,8 +25,8 @@
     </div>
 
     <div class="card-footer d-flex">
-        <a href="#" class="d-inline-flex align-items-center"><i class="ph-heart text-pink me-2"></i>{{$article->comments_count}}</a>
-        <a href="#" class="d-inline-flex align-items-center ms-auto">Read more <i
+        <a href="{{route('article.show',$article)}}#comments" class="d-inline-flex align-items-center"><i class="ph-heart text-pink me-2"></i>{{$article->all_comments_count}}</a>
+        <a href="{{route('article.show',$article)}}" class="d-inline-flex align-items-center ms-auto">Read more <i
                 class="ph-arrow-circle-right ms-2"></i></a>
     </div>
 </div>

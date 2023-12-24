@@ -9,7 +9,6 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Media;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -17,11 +16,9 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $query = Article::query()->latest()->take(4)->withCount('comments');
-        $articlesOne = $query->get();
-        $articlesTwo = $query->skip(4)->get();
-        $articlesThree = $query->skip(8)->get();
-        return view('article.index', compact('articlesOne', 'articlesTwo', 'articlesThree'));
+        $articles = Article::query()->latest()->take(12)->withCount('comments')->get();
+
+        return view('article.index', compact('articles'));
     }
 
     /**
@@ -85,12 +82,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $categories = Category::withCount('articles')->get();
-        $recentArticles = Article::latest()->take(4)->get();
-        $recentArticles->load(['comments', 'tags', 'heroImage']);
-        $loggedInUser = Auth::user();
-        $isAuthor = ($loggedInUser && $loggedInUser->id === $article->author_id);
-        return view('article.view', compact('article', 'categories', 'recentArticles', 'isAuthor'));
+        $article->loadCount('allComments');
+        return view('article.view', compact('article'));
     }
 
     /**

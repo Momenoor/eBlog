@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Article;
 use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -12,7 +11,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class MediaFactory extends Factory
 {
 
+    protected array $types = ['image', 'video', 'audio'];
     protected $model = Media::class;
+
     /**
      * Define the model's default state.
      *
@@ -22,10 +23,9 @@ class MediaFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'type' => $this->faker->word(),
-            'path' => $this->faker->imageUrl(),
+            'type' => $this->types[rand(0, 2)],
+            'path' => $this->faker->imageUrl(rand(200, 400), rand(400, 600)),
             'size' => $this->faker->randomNumber(),
-            'article_id' => Article::factory(),
         ];
     }
 }

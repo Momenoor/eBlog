@@ -18,7 +18,8 @@ return new class extends Migration {
             $table->text('body');
             $table->unsignedBigInteger('author_id');;
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignIdFor(Category::class);
+            $table->foreignId('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->integer('status')->default(0);
             $table->boolean('is_pinned')->default(false);
             $table->timestamp('submitted_at')->nullable();

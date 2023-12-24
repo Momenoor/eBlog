@@ -1,9 +1,11 @@
+{{--@vite(['resources/js/app.js','resources/sass/app.scss'])--}}
+
 <div class="navbar navbar-dark navbar-static py-2">
     <div class="container-fluid">
         <div class="navbar-brand">
             <a href="index.html" class="d-inline-flex align-items-center">
-                <img src="../../../assets/images/logo_icon.svg" alt="">
-                <img src="../../../assets/images/logo_text_light.svg" class="d-none d-sm-inline-block h-16px ms-3" alt="">
+                <img src="{{asset('images/logo_icon.svg')}}" alt="">
+                <img src="{{asset('images/logo_text_light.svg')}}" class="d-none d-sm-inline-block h-16px ms-3" alt="">
             </a>
         </div>
 

@@ -15,7 +15,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignIdFor(Article::class);
+            $table->foreignIdFor(Article::class)->constrained();
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
             $table->longText('body');
             $table->timestamps();
         });

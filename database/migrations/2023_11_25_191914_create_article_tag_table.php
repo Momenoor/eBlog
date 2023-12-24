@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('article_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Tag::class);
-            $table->foreignIdFor(Article::class);
+            $table->foreignIdFor(Tag::class)->index();
+            $table->foreignIdFor(Article::class)->index();
             $table->timestamps();
         });
     }
