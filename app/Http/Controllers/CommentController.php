@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use Illuminate\Http\Request;
-use App\Http\Requests\CommentsUpdateRequest;
 use App\Http\Requests\CommentsStoreRequest;
 use App\Models\Article;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {
@@ -35,6 +33,17 @@ class CommentController extends Controller
         if (request()->wantsTurboStream()) {
             return turbo_stream()->target('commentsList')
                 ->action('append')->view('comment._turbo', ['comment' => $comment]);
+        }
+
+        return back();
+    }
+
+    public function storeReply(CommentsStoreRequest $request, Comment $comment)
+    {
+        $reply = $comment->replies()->create($request->all() + ['article_id' => $comment->article_id]);
+        if (request()->wantsTurboStream()) {
+            return turbo_stream()->target('commentsList')
+                ->action('append')->view('comment._turbo', ['reply' => $reply]);
         }
 
         return back();

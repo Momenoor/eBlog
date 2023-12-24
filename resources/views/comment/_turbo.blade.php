@@ -1,2 +1,2 @@
-@include('comment.view', ['comment' => $comment])
+@include('comment.article_comment', ['comment' => $comment])
 

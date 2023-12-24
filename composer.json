@@ -9,6 +9,7 @@
         "barryvdh/laravel-debugbar": "^3.9",
         "guzzlehttp/guzzle": "^7.2",
         "hotwired-laravel/turbo-laravel": "^1.12",
+        "hotwired/turbo-laravel": "^1.12",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",

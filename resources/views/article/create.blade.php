@@ -47,6 +47,7 @@
                         </div>
                         <!--end::Datepicker-->
                 </div>
+            </div>
                 <!--end::Card body-->
             </div>
             <!--end::Status-->
@@ -265,35 +266,4 @@
             <!--end::Main column-->
     </form>
 @endsection
-@push('scripts')
-    <script>
-        $(document).ready(function () {
 
-            // Date picker
-            $('[data-control="datepicker"]').flatpickr();
-
-            //Text Editor
-            var quill = new Quill('#articleBody', {
-                modules: {
-                    toolbar: [
-                        [{
-                            header: [1, 2, 3, false]
-                        }],
-                        ['bold', 'italic', 'underline'],
-                        [{'list': 'ordered'}, {'list': 'bullet'}],
-                        [{'direction': 'rtl'}],
-                        [{'color': []}, {'background': []}],          // dropdown with defaults from theme
-                        [{'font': []}],
-                        ['image', 'code-block'],
-                    ]
-                },
-                placeholder: 'Type your text here...',
-                theme: 'snow' // or 'bubble'
-            });
-            quill.on('text-change', function (delta, oldDelta, source) {
-                $('#body').val(quill.root.innerHTML);
-            });
-
-        });
-    </script>
-@endpush

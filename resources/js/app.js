@@ -1,14 +1,2 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-import ('../../node_modules/jquery/dist/jquery.min.js');
-
-import('./bootstrap');
-
-import('./bootstrap.bundle.js');
-
-import('./all.js');
-
-
+import './elements/turbo-echo-stream-tag';
+import './libs';

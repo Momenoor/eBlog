@@ -96,24 +96,22 @@
                                 </ul>
                             </div>
 
-                            <div class="card-body">
+                            <div class="card-body" id="commentsList">
                                 @if($article->comments_count>0)
                                     @foreach($article->comments as $comment)
-                                        @include('comment.article_parent_comment',$comment)
+                                        @include('comment.article_comment',$comment)
                                     @endforeach
                                 @endif
                             </div>
 
-                            <div class="border-top border-bottom">
-                                <div id="add-comment">
-                                </div>
-                            </div>
-
-                            <div class="card-body text-end">
-                                <button type="button" class="btn btn-primary">
-                                    Submit
-                                    <i class="ph-paper-plane-tilt ms-2"></i>
-                                </button>
+                            <div id="add-comment" class="border-top border-bottom">
+                                @auth()
+                                    @include('comment.article_add_comment')
+                                @else
+                                    <div class="alert alert-info m-4">
+                                        <a href="{{route('login',['redirect'=>request()->url().'#add-comment'])}}">Login</a> to add comment
+                                    </div>
+                                @endauth
                             </div>
                         </div>
                         <!-- /comments -->
@@ -598,16 +596,3 @@
         </div>
     </div>
 @endsection
-@push('scripts')
-    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const quillBasic = new Quill('#add-comment', {
-                bounds: '.content-inner',
-                placeholder: 'Please add your text here...',
-                theme: 'snow'
-            });
-
-        });
-    </script>
-@endpush
