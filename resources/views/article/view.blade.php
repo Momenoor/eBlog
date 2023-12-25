@@ -95,7 +95,16 @@
                                     {{--                                    <li class="list-inline-item">75 pending review</li>--}}
                                 </ul>
                             </div>
-
+                            <div id="add-comment" class="border-top border-bottom">
+                                @auth()
+                                    @include('comment.article_add_comment')
+                                @else
+                                    <div class="alert alert-info m-4">
+                                        <a href="{{route('login',['redirect'=>request()->url().'#add-comment'])}}">Login</a>
+                                        to add comment
+                                    </div>
+                                @endauth
+                            </div>
                             <div class="card-body" id="commentsList">
                                 @if($article->comments_count>0)
                                     @foreach($article->comments as $comment)
@@ -103,27 +112,13 @@
                                     @endforeach
                                 @endif
                             </div>
-
-                            <div id="add-comment" class="border-top border-bottom">
-                                @auth()
-                                    @include('comment.article_add_comment')
-                                @else
-                                    <div class="alert alert-info m-4">
-                                        <a href="{{route('login',['redirect'=>request()->url().'#add-comment'])}}">Login</a> to add comment
-                                    </div>
-                                @endauth
-                            </div>
                         </div>
                         <!-- /comments -->
-
                     </div>
                     <!-- /left content -->
-
-
                     <!-- Right sidebar component -->
                     <div
                         class="sidebar sidebar-component sidebar-expand-lg bg-transparent shadow-none order-1 order-lg-2 ms-lg-3 mb-3">
-
                         <!-- Sidebar content -->
                         <div class="sidebar-content">
 
@@ -596,3 +591,55 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="{{asset('assets/js/vendor/editors/quill/quill.min.js')}}"></script>
+    <script>
+        // Define a global variable to hold the Quill instance
+        window.quillBasic = null;
+
+        function initQuill() {
+            // Check if Quill is already initialized
+            if (window.quillBasic) {
+                return; // Quill is already initialized
+            }
+
+            // Initialize Quill
+            window.quillBasic = new Quill('.add-comment', {
+                bounds: '.content-inner',
+                placeholder: 'Please add your text here...',
+                theme: 'snow'
+            });
+
+            // Event listener for text changes in Quill
+            window.quillBasic.on('text-change', function () {
+                let html = window.quillBasic.root.innerHTML;
+                $('#commentBody').val(html);
+            });
+        }
+
+        function resetQuill() {
+            if (window.quillBasic) {
+                window.quillBasic.root.innerHTML = '';
+                $('#commentBody').val('');
+            }
+        }
+
+        // Initial Quill setup
+        initQuill();
+
+        // Reinitialize Quill after Turbo renders new content
+        document.addEventListener('turbo:load', function () {
+            // Reinitialize only if '.add-comment' exists
+            alert()
+            if (document.querySelector('.add-comment')) {
+                initQuill();
+            }
+        });
+
+        // Reset Quill after form submission
+        document.addEventListener('turbo:submit-end', function () {
+            resetQuill();
+        });
+    </script>
+
+@endpush

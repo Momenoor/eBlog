@@ -15,7 +15,8 @@
             {{--                70--}}
             {{--            </li>--}}
             <li class="list-inline-item ms-2">
-                <a href="#">Reply</a>
+                <a data-turbo="true" href="{{route('comment.add_comment_form',$comment)}}">Reply</a>
+                <div id="commentForm-{{$comment->id}}"></div>
             </li>
             @if($comment->isAuthorized())
                 <li class="list-inline-item">
@@ -30,3 +31,4 @@
         @endif
     </div>
 </div>
+

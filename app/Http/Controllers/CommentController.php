@@ -90,4 +90,10 @@ class CommentController extends Controller
         }
         return redirect()->route('comment.index');
     }
+
+    public function addCommentForm(Comment $comment)
+    {
+        $article = $comment->article;
+        return turbo_stream()->append('commentForm-' . $comment->id, view('comment.article_add_comment', compact('comment', 'article')));
+    }
 }

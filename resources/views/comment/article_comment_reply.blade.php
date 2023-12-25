@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-lg-row mt-3"  id="comment_{{$comment->id}}">
+<div class="d-flex flex-column flex-lg-row mt-3"  id="comment_{{$reply->id}}">
     <div class="me-lg-3 mb-2 mb-lg-0">
         <a href="#"><img src="{{$reply->author->profile_photo_path}}"
                          class="rounded-circle" width="40" height="40" alt=""></a>
@@ -15,7 +15,8 @@
             {{--                70--}}
             {{--            </li>--}}
             <li class="list-inline-item ms-2">
-                <a href="#">Reply</a>
+                <a data-turbo="true" href="{{route('comment.add_comment_form',$reply)}}">Reply</a>
+                <div id="commentForm-{{$reply->id}}"></div>
             </li>
             @if($reply->isAuthorized())
                 <li class="list-inline-item">

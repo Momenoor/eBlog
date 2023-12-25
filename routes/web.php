@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('media', App\Http\Controllers\MediaController::class);
     Route::resource('user', App\Http\Controllers\UserController::class);
     Route::post('article/{article}/comment', [CommentController::class, 'store'])->name('article.create.comment');
+    Route::get('comment/{comment}/add-form', [CommentController::class, 'addCommentForm'])->name('comment.add_comment_form');
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('category', App\Http\Controllers\CategoryController::class);
     Route::resource('tag', App\Http\Controllers\TagController::class);

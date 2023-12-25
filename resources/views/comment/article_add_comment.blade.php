@@ -11,26 +11,5 @@
         </button>
     </div>
 </form>
-@push('scripts')
-    <script src="{{asset('assets/js/vendor/editors/quill/quill.min.js')}}"></script>
-    <script>
-        let quillBasic = null;
-        $(document).ready(function () {
-            quillBasic = new Quill('.add-comment', {
-                bounds: '.content-inner',
-                placeholder: 'Please add your text here...',
-                theme: 'snow'
-            });
-            quillBasic.on('text-change', function () {
-                let html = quillBasic.root.innerHTML;
-                $('#commentBody').val(html);
-            });
-        });
-        document.addEventListener('turbo:submit-end', function () {
-            quillBasic.root.innerHTML = '';
-            $('#commentBody').val('');
-        });
 
-    </script>
-@endpush
 
