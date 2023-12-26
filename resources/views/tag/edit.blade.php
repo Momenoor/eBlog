@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
 <form action="{{route('tag.update',$tag)}}" method="POST">
     @csrf

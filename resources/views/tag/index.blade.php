@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
 <!--begin::Main-->
 <div class="row">
@@ -132,58 +132,40 @@
     <!--begin::Table Column (col-9)-->
     <div class="col-lg-9">
 
-        <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-            <!-- ... (your existing code for the table) ... -->
-            <div class="d-flex flex-column flex-column-fluid">
-                <!--begin::Toolbar-->
 
-
-                <!--end::Toolbar-->
-                <div class="card-body pt-0 col-9">
-                    <!-- ... (your existing code for the table) ... -->
-                    <!--begin::Content-->
-                    <div id="kt_app_content" class="app-content  flex-column-fluid ">
-                        <!--begin::Products-->
-                        <div class="card card-flush">
-                            <!--begin::Card header-->
-                            <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-                                <!--begin::Card title-->
-                                <div class="card-title">
-                                    Tags List
-                                </div>
-                                <!--end::Card title-->
-                            </div>
-                            <!--end::Card toolbar-->
-                        </div>
-                        <!--end::Card header-->
-                    </div>
-                    <!--begin::Card body-->
-                    <!--begin::Label-->
-                    <table class="table align-middle table-row-dashed fs-6 gy-5 " id="tags_table"
-                        data-turbo-frame="tagsList">
-                        <thead>
-                            <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase">
-                                <th class="min-w-10px">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#tags_table .form-check-input" value="1" />
-                                    </div>
-                                </th>
-                                <th class="text-end min-w-60px">Name</th>
-                                <th class="text-end min-w-100px">Slug</th>
-                                <th class="text-end min-w-100px">Description</th>
-                                <th class="text-end min-w-70px">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fw-semibold text-gray-600" id="tagsList">
-                            @include('tag.list')
-                        </tbody>
-
-                    </table>
-
+        <!-- Content area -->
+        <div class="content ">
+            <!-- Media library -->
+            <div class="card ">
+                <div class="card">
+                    <h4 class="mb-0 "> Tags List</h4>
                 </div>
+
+                <table class="table media-library ">
+                    <thead class="">
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="form-check-input">
+                            </th>
+                            <th>Name</th>
+                            <th>Slug</th>
+                            <th>Description</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @include('tag.list')
+
+
+
+                    </tbody>
+                </table>
             </div>
+            <!-- /media library -->
+
         </div>
+        <!-- /content area -->
     </div>
     <!--end::Table Column (col-9)-->
 </div>

@@ -86,5 +86,4 @@ class Article extends Model
     {
         return Str::limit($this->body, 350);
     }
-
 }

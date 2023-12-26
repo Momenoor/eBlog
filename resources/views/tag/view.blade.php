@@ -1,54 +1,37 @@
 <tr id="tag-{{$tag->id}}">
     <td>
-        <div class="form-check form-check-sm form-check-custom form-check-solid">
-            <input class="form-check-input" type="checkbox" value="1" />
-        </div>
+        <input type="checkbox" class="form-check-input">
     </td>
-    <td class="text-end pe-0">
-        <span class="fw-bold">{{$tag->name}}</span>
-    </td>
-    <td class="text-end pe-0">
-        <span class="fw-bold">{{$tag->slug}}</span>
-    </td>
-    <td class="text-end pe-0">
-        <!--begin::Badges-->
-        <span class="fw-bold">{{$tag->description}}</span>
-        <!--end::Badges-->
-    </td>
-    <td class="text-end ml-10">
-        <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
-            data-kt-menu-trigger="click">
-            Actions
-            <i class="ki-duotone ki-down fs-5 ms-1"></i> </a>
-        <!--begin::Menu-->
-        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
-            data-kt-menu="true">
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <a href="{{route('tag.show',$tag)}}" class="menu-link px-3">
-                    View
-                </a>
-            </div>
-            <!--end::Menu item-->
-            <div class="menu-item px-3">
-                <a href="{{route('tag.edit',$tag)}}" class="menu-link px-3">
-                    Edit
-                </a>
-            </div>
 
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-                <form action="{{route('tag.destroy',$tag)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-link menu-link px-3">
-                        Delete
-                    </button>
-                </form>
+    <td>{{$tag->name}}</td>
+    <td>{{$tag->slug}}</td>
+    <td>{{$tag->description}}</td>
+
+    <td class="text-center">
+        <div class="d-inline-flex">
+            <div class="dropdown">
+                <a href="#" class="text-body" data-bs-toggle="dropdown">
+                    <i class="ph-list"></i>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a href="{{route('tag.edit',$tag)}}" class="dropdown-item">
+                        <i class="ph-pencil me-2"></i>
+                        Edit file
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+                    <form action="{{route('tag.destroy',$tag)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="dropdown-item">
+                            <i class="ph-trash me-2"></i>
+                            Move to trash
+                        </button>
+                    </form>
+                </div>
             </div>
-            <!--end::Menu item-->
-            <!--end::Menu item-->
         </div>
-        <!--end::Menu-->
     </td>
+
 </tr>

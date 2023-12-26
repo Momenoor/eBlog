@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
 <!--begin::Wrapper-->
 <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
