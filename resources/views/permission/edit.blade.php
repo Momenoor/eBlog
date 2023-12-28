@@ -1,16 +1,18 @@
 @extends('layouts.master')
 @section('content')
-<form action="{{route('permission.update',$permission)}}" method="POST">
-    @csrf
-    @method('PUT')
-    <div class="card">
-        <div class="card card-flush py-4">
-            <!--begin::Card header-->
-            <div class="card-header">
-                <div class="card-title">
-                    <h2>{{__('update_permission')}}</h2>
-                </div>
-            </div>
+
+
+
+<!-- Content area -->
+<div class="content ">
+    <!-- Media library -->
+    <div class="card ">
+        <div class="card">
+            <h4 class="mb-0 ">Edit Permission </h4>
+        </div>
+        <form action="{{route('permission.update',$permission)}}" method="POST">
+            @csrf
+            @method('PUT')
             @if(session('error'))
             <div class="alert alert-danger">
                 {{session('error')}}
@@ -87,7 +89,7 @@
                 </button>
                 <!--end::Button-->
             </div>
-        </div>
     </div>
+</div>
 </form>
 @endsection

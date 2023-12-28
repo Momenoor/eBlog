@@ -52,11 +52,11 @@
                                 <!--begin::Image placeholder-->
                                 <style>
                                     .image-input-placeholder {
-                                        background-image: url('/metronic8/demo28/assets/media/svg/files/blank-image.svg');
+                                        background-image: url('assets/media/svg/files/blank-image.svg');
                                     }
 
                                     [data-bs-theme="dark"] .image-input-placeholder {
-                                        background-image: url('/metronic8/demo28/assets/media/svg/files/blank-image-dark.svg');
+                                        background-image: url('assets/media/svg/files/blank-image-dark.svg');
                                     }
                                 </style>
                                 <!--end::Image placeholder-->
@@ -64,8 +64,8 @@
                                 <div class="image-input image-input-outline image-input-placeholder"
                                     data-kt-image-input="true">
                                     <!--begin::Preview existing avatar-->
-                                    <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url(/metronic8/demo28/assets/media/avatars/300-6.jpg);">
+                                    <div class="image-input-wrapper w-325px h-125px"
+                                        style="background-image: url('assets/media/avatars/300-6.jpg');">
                                     </div>
                                     <!--end::Preview existing avatar-->
 

@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\ArticleController::class, 'index'])->name('home');
 // Define a custom middleware for admin
-Route::resource('article', App\Http\Controllers\ArticleController::class)->only('index', 'show');
+Route::resource('article', App\Http\Controllers\ArticleController::class)->only('index', 'create', 'show');
 
 Route::middleware('auth')->group(function () {
     Route::resource('article', App\Http\Controllers\ArticleController::class)->only('create', 'store', 'edit', 'update', 'destroy');
@@ -34,9 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('category', App\Http\Controllers\CategoryController::class);
     Route::resource('tag', App\Http\Controllers\TagController::class);
+    Route::resource('role', App\Http\Controllers\RoleController::class);
 });
 
 Route::group(['middleware' => ['role:admin']], function () {
-
-    Route::resource('role', App\Http\Controllers\RoleController::class);
 });

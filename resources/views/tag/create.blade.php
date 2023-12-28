@@ -1,5 +1,4 @@
-@extends('layouts.master')
-@section('content')
+<!-- ... (your form code goes here) ... -->
 <form action="{{route('tag.store')}}" method="POST">
     @csrf
     <div class="card">
@@ -10,7 +9,6 @@
                 <div class="card-title">
                     <h2>{{__('create_new_tag')}}</h2>
                 </div>
-
             </div>
             @if(session('error'))
             <div class="alert alert-danger">
@@ -36,8 +34,9 @@
                         <label class="required form-label"> Tag Name</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="text" name="name" class="form-control mb-2  @error('name') is-invalid @enderror"
-                            placeholder="Tag Name" value="{{old('name')}}" />
+                        <input type="text" name="name" id="name"
+                            class="form-control mb-2  @error('name') is-invalid @enderror" placeholder="Tag Name"
+                            value="{{old('name')}}" />
                         <!--end::Input-->
                         <!--begin::Description-->
                         <div class="text-muted fs-7">Tag Name is required and recommended to
@@ -55,7 +54,7 @@
                         <label class="required form-label"> Description</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <textarea type="text" name="description"
+                        <textarea type="text" name="description" id="description"
                             class="form-control mb-2  @error('name') is-invalid @enderror" placeholder="description"
                             value="{{old('description')}}"></textarea>
                         <!--end::Input-->
@@ -73,16 +72,18 @@
             <div class="d-flex justify-content-end">
                 <!--begin::Button-->
                 <a href="{{route('tag.index')}}" id="kt_ecommerce_add_product_cancel"
-                    class="btn btn-light me-5">Cancel</a>
+                    class="btn btn-sm btn-light me-5">Cancel</a>
                 <!--end::Button-->
                 <!--begin::Button-->
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-sm btn-primary" data-turbo-action="append"
+                    data-turbo-frame="tagsList">
                     <span class="indicator-label">Save Changes</span>
                     <span class="indicator-progress">Please wait...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
+
                 <!--end::Button-->
             </div>
         </div>
+    </div>
 </form>
-@endsection
