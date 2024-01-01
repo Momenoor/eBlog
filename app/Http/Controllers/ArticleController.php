@@ -61,7 +61,7 @@ class ArticleController extends Controller
                     'name' => $imageName,
                     'type' => $image->getClientOriginalExtension(),
                     'size' => $size,
-                    'article_id' => $article->id,
+                    //'article_id' => $article->id,
                 ]);
 
                 $article->update([

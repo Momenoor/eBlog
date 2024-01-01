@@ -39,7 +39,6 @@ class ArticleStoreRequest extends FormRequest
             'is_pinned' => 0,
             'submitted_at' => $this->get('submitted_at') ?? now(),
             'approved_at' => null,
-            'published_at' => null,
             'declined_at' => null,
         ]);
 

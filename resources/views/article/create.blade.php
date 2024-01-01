@@ -35,27 +35,17 @@
                     <!--end::Description-->
                     <!--begin::Datepicker-->
                     <div class="mt-10">
-                        <label for="kt_ecommerce_add_category_status_datepicker" class="form-label">Select
-                            publishing date and time</label>
+                        <label for="kt_ecommerce_add_category_status_datepicker" class="form-label">Select publishing
+                            date and time</label>
                         <input data-control="datepicker" placeholder="Pick date & time" name="published_at"
                             id="datetimePicker" class="form-control @error('published_at') is-invalid @enderror"
-                            value="{{old('published_at')}}" />
-                        @error('name')
-                        <span class="text-danger">{{$errors->first('published_at')}}</span>
+                            value="{{ old('published_at') }}" />
+                        @error('published_at')
+                        <span class="text-danger">{{ $errors->first('published_at') }}</span>
                         @enderror
                     </div>
-                    <!--end::Datepicker
-                    <div class="mb-4">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="ph-calendar"></i>
-                            </span>
-                            <input type="datetime-local" data-control="datepicker" placeholder="Pick date & time"
-                                name="published_at"
-                                class="form-control datepicker-basic @error('published_at') is-invalid @enderror"
-                                placeholder="Pick a date" value="{{old('published_at')}}" />
-                        </div>
-                    </div>-->
+
+                    <!--end::Datepicker-->
             </div>
         </div>
         <!--end::Card body-->
@@ -137,7 +127,6 @@
             </div>
             <!--end::Card body-->
         </div>
-
         @if(session('error'))
         <div class="alert alert-danger">
             {{session('error')}}
@@ -242,8 +231,7 @@
                         @enderror
                     </div>
                     <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <!--end::Input group-->
+
                 </div>
                 <!--end::Card header-->
             </div>
@@ -267,13 +255,13 @@
 </form>
 @endsection
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+
 <script>
-    const datetimePicker = document.getElementById('datetimePicker');
-
-    datetimePicker.addEventListener('change', function() {
-      const selectedDateTime = datetimePicker.value;
-      console.log('Selected Date and Time:', selectedDateTime);
-
+    $(document).ready(function () {
+        $('#datetimePicker').datepicker({
+            format: 'yyyy-mm-dd',
+        });
     });
 </script>
 <script>
